@@ -1,3 +1,5 @@
+#!/bin/bash
+
 __NAME__="setup_user_configs"
 
 function setup_user_configs() {
