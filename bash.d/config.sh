@@ -305,3 +305,5 @@ fi
 
 ((_HOME_CONFIG_SHELL_PROFILE_+=1))
 export _HOME_CONFIG_SHELL_PROFILE_
+
+#file-settings for vim: foldmethod=marker foldmarker=#region,#endregion
