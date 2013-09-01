@@ -30,7 +30,9 @@ function setup_user_configs() {
       *)
           mkdir -p $backup_dir
           for file in ${locations[*]}; do
+            if [ -e $file ]; then
               mv --no-target-directory $file $backup_dir/$(basename $file)
+            fi
           done
           ;;
   esac
