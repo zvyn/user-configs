@@ -1,3 +1,5 @@
+#!/bin/bash
+
 __NAME__="setup_user_configs"
 
 function setup_user_configs() {
@@ -56,6 +58,6 @@ function setup_user_configs() {
   esac
 }
 
-if [[ $0 == *setup_user_configs.bash ]]; then
+if [[ "$0" == "*${__NAME__}.bash" ]]; then
   setup_user_configs $0 $*
 fi
