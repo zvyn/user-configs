@@ -20,12 +20,26 @@ function setup_user_configs() {
     [vim/vimrc.bundles.local]="$HOME/.vimrc.bundles.local"
     )
 
+  local desition=''
+  local backup_dir="$HOME/config-$(date +%Y/%m/%d)"
+  echo -n "Make a backup into $backup_dir first? [Y/n] "; read desition
+  case $desition in
+      n|no|N|No)
+          break
+          ;;
+      *)
+          mkdir -p $backup_dir
+          for file in ${locations[*]}; do
+              mv --no-target-directory $file $backup_dir/$(basename $file)
+          done
+          ;;
+  esac
+
   for target in ${!locations[@]}; do
     ln --symbolic --interactive --no-target-directory\
       ${self[location]}/$target ${locations[$target]}
   done
 
-  local desition=''
   echo -n "Install vim-spf13? [y/N] "; read desition
   case $desition in
       y|yes|Y|Yes) curl http://j.mp/spf13-vim3 -L -o - | sh
@@ -35,7 +49,7 @@ function setup_user_configs() {
   echo -n "Append ssh-keys to authorized keys? [y/N] "; read desition
   case $desition in
       y|yes|Y|Yes)
-          cat ${self[location]}/ssh/* >> $HOME/.ssh/authorized_keys
+          cat ${self[location]}/ssh/*.pub >> $HOME/.ssh/authorized_keys
           ;;
   esac
 }
