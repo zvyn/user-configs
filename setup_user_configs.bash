@@ -1,10 +1,8 @@
 __NAME__="setup_user_configs"
 
 function setup_user_configs() {
-  declare -A local self=(
-    [name]="$__NAME__"
-    [location]="$(dirname $(readlink -f $1))"
-    )
+  declare -A local self
+  self[location]="$(dirname $(readlink -f $1))"
 
   if [[ $XDG_CONFIG_HOME == '' ]]; then
     local XDG_CONFIG_HOME="$HOME/.config"
@@ -27,7 +25,19 @@ function setup_user_configs() {
       ${self[location]}/$target ${locations[$target]}
   done
 
-  cat ${self[location]}/ssh/* >> $HOME/.ssh/authorized_keys
+  local desition=''
+  echo -n "Install vim-spf13? [y/N] "; read desition
+  case $desition in
+      y|yes|Y|Yes) curl http://j.mp/spf13-vim3 -L -o - | sh
+          ;;
+  esac
+
+  echo -n "Append ssh-keys to authorized keys? [y/N] "; read desition
+  case $desition in
+      y|yes|Y|Yes)
+          cat ${self[location]}/ssh/* >> $HOME/.ssh/authorized_keys
+          ;;
+  esac
 }
 
 if [[ $0 == *setup_user_configs.bash ]]; then

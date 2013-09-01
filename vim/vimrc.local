@@ -1,0 +1,183 @@
+" No need to be compatible with vi and lose features.
+set nocompatible
+
+" Turn on mouse for Xterms (use ssh -X for remote)
+set mouse=a
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" Set automatic filetype detection to on.
+filetype on
+
+"" region key-bindings
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+set hlsearch "Highlight search things
+
+" Run any runnable file.
+map <F5> :w<CR>:!/usr/local/lib/torben/library/runable/codeFile.py -f  $(echo -en $PWD/; basename %)<CR>
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Toggle folds with space.
+nmap <space> za
+
+"Pressing ,s will toggle and untoggle spell checking
+map <leader>s :setlocal spell!<cr>
+map <leader>sd :setlocal spelllang=de_de<cr>
+map <leader>se :setlocal spelllang=en_us<cr>
+"Pressing ctr-f corrects spelling in both insert and normal mode.
+imap <c-f> <c-g>u<Esc>[H>[s1z=`]a<c-g>u
+nmap <c-f> [s1z=<c-o>
+"" endregion
+
+""region Tabs
+set tabstop=4
+set shiftwidth=4
+set expandtab
+retab
+
+" no placeholders please
+let g:Imap_UsePlaceHolders = 0
+
+" no " conversion please
+let g:Tex_SmartKeyQuote = 0
+""endregion
+
+""region Textwidth, Wrapping, Indention
+set textwidth=79
+set colorcolumn=80
+set autoindent
+set nowrap
+""endregion
+
+""region Theme and Layout
+""region Displayed Information
+" Set syntax on.
+syntax on
+
+" Show hidden character
+set list
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
+" Show matching braces.
+set showmatch
+
+" Set encoding to utf-8
+set encoding=utf-8
+
+" Always show the name of the file being edited.
+set ls=2
+
+" Show the mode (insert,replace,etc.)
+set showmode
+
+" No blinking cursor please.
+set gcr=a:blinkon0
+""endregion
+
+" Set Colors
+colorscheme darkblue
+""endregion
+
+""region C code
+
+" Toggle between .h and .cpp with F4.
+function! ToggleBetweenHeaderAndSourceFile()
+  let bufname = bufname("%")
+  let ext = fnamemodify(bufname, ":e")
+  if ext == "h"
+    let ext = "cpp"
+  elseif ext == "cpp"
+    let ext = "h"
+  else
+    return
+  endif
+  let bufname_new = fnamemodify(bufname, ":r") . "." . ext
+  let bufname_alt = bufname("#")
+  if bufname_new == bufname_alt
+    execute ":e#"
+  else
+    execute ":e " . bufname_new
+  endif
+endfunction
+map <silent> <F4> :call ToggleBetweenHeaderAndSourceFile()<CR>
+""endregion
+
+""region Makefiles
+" But TABs are needed in Makefiles
+au BufNewFile,BufReadPost Makefile se noexpandtab
+
+" don't use Makefile if one is there
+let g:Tex_UseMakefile = 0
+""endregion
+
+""region Latex
+filetype plugin indent on
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+""endregion
+
+""region F5-runner
+" C++
+autocmd FileType c++ map <F5> :w<CR>:!runc %<CR>
+
+" Python
+
+autocmd FileType python map <F5> :w<CR>:!./%<CR>
+
+" Latex + biber
+autocmd FileType latex map <F5> :w<CR>:!pdflatex *Main.tex; biber *Main.bib; pdflatex *Main.tex<CR>
+""endregion
+
+""region spell
+set spelllang=de_de,en_us
+highlight clear SpellBad
+highlight SpellBad cterm=underline,bold ctermfg=red
+""endregion
+
+"" region guioptions
+set guioptions=agimrt
+" The following 2 lines are neccesery due to a bug
+set guioptions+=LlRrb
+set guioptions-=LlRrb
+set guifont="Ubuntu Mono 11"
+"" endregion
+
+""region Syntastics
+let g:syntastic_check_on_open=1
+""endregion
+
+""region Regions
+set foldmethod=marker "indent,marker,syntax
+set foldmarker=region,endregion
+""endregion
+
+""region Autocomplete
+let g:neocomplete#disable_auto_complete = 1
+
+" Test if the previous char is a space
+function! s:check_back_space()
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Use tab to open or navigate in autocomplete.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ neocomplete#start_manual_complete()
+
+" Use shift-tab to navigate backwards
+inoremap <expr><s-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
+""endregion
+
+let g:pymode_folding = 0
