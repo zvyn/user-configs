@@ -1,0 +1,9 @@
+#!/bin/bash
+# This file is automatically executed by KDM, GDM and XDM.
+# Source it in .xinitrc manually or have a rule in xinit.d!
+
+dirname="$(dirname $(readlink --canonicalize .xprofile))"
+source ${dirname}/bash.d/config.sh
+
+xmodmap /home/milan/.Xmodmap &
+sudo hdmi-switch &
