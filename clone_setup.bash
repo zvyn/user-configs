@@ -3,6 +3,7 @@
 
 function clone_setup() {
 ## Clone user-configs from github and run setup.
+  echo Clone user-configs to config and run setup-script? [y/N]\ 
   local desition=''
   read desition
   case $desition in
