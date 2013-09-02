@@ -10,6 +10,7 @@ function setup_user_configs() {
   if [[ $XDG_CONFIG_HOME == '' ]]; then
     local XDG_CONFIG_HOME="$HOME/.config"
   fi
+  mkdir -p "$XDG_CONFIG_HOME"
   #/>
 
   ## Map files in this repository to files in the users home-directory.
@@ -63,6 +64,7 @@ function setup_user_configs() {
   echo -n "Append ssh-keys to authorized keys? [y/N] "; read desition
   case $desition in
     y|yes|Y|Yes)
+      mkdir -p $HOME/.ssh/
       cat ${self[location]}/ssh/*.pub >> $HOME/.ssh/authorized_keys
       ;;
   esac
@@ -70,9 +72,35 @@ function setup_user_configs() {
 #/>
 }
 
+function clone_setup() {
+## Clone user-configs from github and run setup.
+  echo -n Clone user-configs to $HOME/config and run setup? [y/N]\ 
+  local desition=''
+  read desition
+  case $desition in
+    y|yes|Y|Yes)
+      set -e
+      git clone https://github.com/zvyn/user-configs.git $HOME/config
+      (setup_user_configs $HOME/config/)
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+#/>
+}
+
 ## Run only if called directly. Makes sourcing of this file safe.
-__NAME__="setup_user_configs"
-if [[ "$0" == "*${__NAME__}.bash" ]]; then
+unset __NAME__
+case $0 in
+  *setup_user_configs.bash)
+    __NAME__="setup_user_configs"
+    ;;
+  *clone_setup.bash)
+    __NAME__="clone_setup"
+    ;;
+esac
+if [ ${__NAME__} ]; then
   ${__NAME__} $0 $*
 fi
 #/> file-settings for vim: foldmethod=marker foldmarker=##,#/> shiftwidth=2
