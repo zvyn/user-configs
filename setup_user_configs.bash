@@ -29,7 +29,7 @@ function setup_user_configs() {
 
   ## Make a backup of existing files (by default).
   local desition=''
-  local backup_dir="$HOME/config-$(date +%Y/%m/%d)"
+  local backup_dir="$HOME/config-$(date +%Y/%m/%d/%H:%M:%S)"
   echo -n "Make a backup into $backup_dir first? [Y/n] "; read desition
   case $desition in
     n|no|N|No)
@@ -72,35 +72,11 @@ function setup_user_configs() {
 #/>
 }
 
-function clone_setup() {
-## Clone user-configs from github and run setup.
-  echo -n Clone user-configs to $HOME/config and run setup? [y/N]\ 
-  local desition=''
-  read desition
-  case $desition in
-    y|yes|Y|Yes)
-      set -e
-      git clone https://github.com/zvyn/user-configs.git $HOME/config
-      (setup_user_configs $HOME/config/)
-      ;;
-    *)
-      return 1
-      ;;
-  esac
-#/>
-}
-
 ## Run only if called directly. Makes sourcing of this file safe.
-unset __NAME__
-case $0 in
-  *setup_user_configs.bash)
-    __NAME__="setup_user_configs"
-    ;;
-  *clone_setup.bash)
-    __NAME__="clone_setup"
-    ;;
-esac
-if [ ${__NAME__} ]; then
-  ${__NAME__} $0 $*
+if [ ! $__NAME__ ]; then
+  __NAME__=$(basename --suffix=.bash $0)
+  if [[ $(type -t ${__NAME__}) == function ]]; then
+    ${__NAME__} $0 $*
+  fi
 fi
 #/> file-settings for vim: foldmethod=marker foldmarker=##,#/> shiftwidth=2
