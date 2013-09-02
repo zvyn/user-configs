@@ -3,7 +3,6 @@
 
 function clone_setup() {
 ## Clone user-configs from github and run setup.
-  echo -n Clone user-configs to $HOME/config and run setup? [y/N]\ 
   local desition=''
   read desition
   case $desition in
@@ -19,7 +18,11 @@ function clone_setup() {
 #/>
 }
 
-## Run always! Useful for piping into bash but unwanted when being sourced.
-__NAME__="clone_setup"
-${__NAME__} $0 $*
+## Run only if called directly. Makes sourcing of this file safe.
+if [ ! $__NAME__ ]; then
+  __NAME__=$(basename --suffix=.bash $0)
+  if [[ $(type -t ${__NAME__}) == function ]]; then
+    ${__NAME__} $0 $*
+  fi
+fi
 #/> file-settings for vim: foldmethod=marker foldmarker=##,#/> shiftwidth=2
