@@ -2,29 +2,8 @@
 # ~/config/shell_profile
 #
 
-#region Enovirenment-Variables
-# colors:
-COLOR_GREEN="\[\033[0;32m\]"
-COLOR_CYAN="\[\033[0;36m\]"
-COLOR_BCYAN="\[\033[1;36m\]"
-COLOR_BLUE="\[\033[0;34m\]"
-COLOR_GRAY="\[\033[0;37m\]"
-COLOR_DKGRAY="\[\033[1;30m\]"
-COLOR_WHITE="\[\033[1;37m\]"
-COLOR_RED="\[\033[0;31m\]"
-COLOR_DEFAULT="\[\033[0;39m\]"
-# without padding
-_COLOR_GREEN="\033[0;32m"
-_COLOR_CYAN="\033[0;36m"
-_COLOR_BCYAN="\033[1;36m"
-_COLOR_BLUE="\033[0;34m"
-_COLOR_GRAY="\033[0;37m"
-_COLOR_DKGRAY="\033[1;30m"
-_COLOR_WHITE="\033[1;37m"
-_COLOR_RED="\033[0;31m"
-_COLOR_DEFAULT="\033[0;39m"
-
-# locals:
+## Enovirenment-Variables
+## locals:
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -34,20 +13,20 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_MONETARY="de_DE.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 export MM_CHARSET="de_DE.UTF-8"
+#/>
 
-export HISTIGNORE="&:ls:[bf]g:exit: *"
+export HISTIGNORE="&:ls:[bf]g:exit: *:reboot:poweroff"
 export HISTFILE="$HOME/.histfile"
 export HISTSIZE=5000
 export SAVEHIST=5000
-semester="WiSe12"
-export CDPATH=:/home/milan/:/home/milan/Studium/$semester:/home/milan/uni/InformationRetrieval/mo54-ts190
+export CDPATH=:/home/milan/
 export PATH="/usr/lib/colorgcc/bin:$PATH:/home/milan/Programme/bin:/home/milan/.gem/ruby/2.0.0/bin"
 export EDITOR="vim"
 export LS_COLORS='di=01;36:*.zip=33:*.tar=33:*.tar.gz=33:*.tar.bz2=33:*.jpg=35:*.JPG=35:*.jpeg=35:*.JPEG=35:*.PNG=35:*.png=35:*.rar=33:*.ico=35:*.gif=35:*.svg=35:*.xcf=35:*.cpp=31:*.h=31:*.rkt=31'
 export QEMU_AUDIO_DRV=pa
-#endregion
+#/>
 
-#region Aliases
+## Aliases
 alias ssh_w3h='command ssh wshaend@www.haendel.uni-freiburg.de'
 alias ssh_info='command ssh oberkirm@login.informatik.uni-freiburg.de'
 alias ssh_rz='command ssh mo54@login.uni-freiburg.de'
@@ -81,12 +60,42 @@ alias status='sudo systemctl status'
 alias halt='sudo shutdown -h now'
 alias ducks='du -cksh * | sort -rn'
 alias reload='exec $0'
-#endregion
+alias color="changeColor"
+#/>
 
-#region Functions
-#region Personal Hacks & Backups
+## Functions
+## colors
+padWithEscape () {
+    echo -en "\[$*\]"
+}
 
-#region auen
+changeColor () {
+    local color=39
+    local bold=0
+    case $1 in
+        green)
+            color=32;;
+        cyan)
+            color=36;;
+        blue)
+            color=34;;
+        gray)
+            color=37;;
+        darkgrey)
+            color=30;;
+        red)
+            color=31;;
+    esac
+    if [[ "$2" == "bold" ]]; then
+        bold=1
+    fi
+    echo -en "\033[${bold};${color}m"
+}
+#/>
+
+## Personal Hacks & Backups
+
+## auen
 if [[ $HOSTNAME = "auen" ]]; then
   alias rsync_local='test -d /data/backup/current/ &&\
     command sudo rsync /home/milan/ /data/backup/current/home/milan/\
@@ -131,7 +140,7 @@ if [[ $HOSTNAME = "auen" ]]; then
     echo -e "$_COLOR_DEFAULT"
   }
 fi
-#endregion
+#/>
 
 # list all module-options
 list_mod_parameters () 
@@ -187,9 +196,9 @@ bindMusic () {
   sudo mount --bind /data/media/Musik /home/milan/Musik
 }
 
-#endregion
+#/>
 
-#region 3-Liners
+## 3-Liners
 
 say () {
     for word in $*
@@ -215,9 +224,9 @@ playFreq () {
 function remindme() {
 sleep $1 && (zenity --info --text "$2" || echo "$2") &
 }
-#endregion
+#/>
 
-#region (Un-)Pack
+## (Un-)Pack
 # Unpacks Archives inplace
 function unpack() {
 if [ -f $1 ]; then
@@ -300,10 +309,10 @@ else
   echo "Cannot pack \"$2\" with pack()"
 fi
 }
-#endregion
-#endregion
+#/>
+#/>
 
 ((_HOME_CONFIG_SHELL_PROFILE_+=1))
 export _HOME_CONFIG_SHELL_PROFILE_
 
-#file-settings for vim: foldmethod=marker foldmarker=#region,#endregion
+#file-settings for vim: foldmethod=marker foldmarker=##,#/>

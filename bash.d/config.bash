@@ -12,35 +12,33 @@ prompt_command () {
   local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1,2}' | head -1`
   # local batteryLoad=`acpi | cut -d' ' -f 4 | tr -d ','`
   local gitBranch=$(git branch 2>/dev/null | sed --regexp-extended \
-    "s/^\* (.*)$/ $(validateSEDReplacement "$COLOR_RED")\1$(validateSEDReplacement "$COLOR_BLUE")/g" \
+      "s/^\* (.*)$/ $(validateSEDReplacement "$(color\
+      red)")\1$(validateSEDReplacement "$(color blue)")/g" \
     | tr --delete "\n" | sed 's/  / /g' | sed 's/^ *//g' | sed 's/ *$//g')
   if [ "$gitBranch" ]; then
-    gitBranch="${COLOR_BLUE}(${gitBranch}${COLOR_BLUE})"
+      gitBranch="$(color blue)(${gitBranch}$(color blue))"
   else
-    gitBranch="${COLOR_BLUE}#!"
+      gitBranch="$(color blue)#!"
   fi
 
   errorPrompt=""
   if [ $errorNumber -ne 0 ]; then # set an error string for the prompt, if applicable
     errorPrompt="($errorNumber) "
   fi
+
   if [ `id -u` -eq 0 ]; then
-    local userColor="${COLOR_RED}"
+      local userColor="$(color red)"
   else
-    local userColor="${COLOR_GREEN}"
+      local userColor="$(color green)"
   fi
-  # if (acpi -a | grep --quiet on) &> /dev/null; then
-  #   local batteryPrompt="${COLOR_GREEN}+${COLOR_DKGRAY}$batteryLoad"
-  # elif (acpi -a | grep --quiet off) &> /dev/null; then
-  #   local batteryPrompt="${COLOR_RED}-${COLOR_DKGRAY}$batteryLoad"
-  # fi
+
   if [[ "$TERM" != 'linux' ]]; then
     local titleBar="\[\e]0;${errorPrompt}\u@\h:`pwd`\a\]"
   fi
 
-  export PS1="${titleBar}${COLOR_RED}$errorPrompt${userColor}\u${COLOR_BLUE}@${COLOR_CYAN}\
-\h${COLOR_BLUE} (${systemLoad}) ${userColor}\
-\w\n${gitBranch}${COLOR_DEFAULT} "
+  export PS1="${titleBar}$(color red)$errorPrompt${userColor}\u$(color\
+      blue)@$(color cyan)\h$(color\
+      blue) (${systemLoad}) ${userColor}\w\n${gitBranch}$(color default) "
 }
 PROMPT_COMMAND=prompt_command
 
