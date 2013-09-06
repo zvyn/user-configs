@@ -60,7 +60,6 @@ alias status='sudo systemctl status'
 alias halt='sudo shutdown -h now'
 alias ducks='du -cksh * | sort -rn'
 alias reload='exec $0'
-alias color="paddedColor"
 #/>
 
 ## Functions
