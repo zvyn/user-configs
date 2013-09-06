@@ -86,6 +86,7 @@ set autoread
     ""endregion
 
     " Set Colors
+    set t_Co=256
     colorscheme darkblue
 ""endregion
 
