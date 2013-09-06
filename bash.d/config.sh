@@ -60,7 +60,7 @@ alias status='sudo systemctl status'
 alias halt='sudo shutdown -h now'
 alias ducks='du -cksh * | sort -rn'
 alias reload='exec $0'
-alias color="changeColor"
+alias color="paddedColor"
 #/>
 
 ## Functions
@@ -90,6 +90,10 @@ changeColor () {
         bold=1
     fi
     echo -en "\033[${bold};${color}m"
+}
+
+paddedColor () {
+    echo -n $(padWithEscape $(changeColor $*))
 }
 #/>
 

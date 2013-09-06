@@ -12,13 +12,13 @@ prompt_command () {
   local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1,2}' | head -1`
   # local batteryLoad=`acpi | cut -d' ' -f 4 | tr -d ','`
   local gitBranch=$(git branch 2>/dev/null | sed --regexp-extended \
-      "s/^\* (.*)$/ $(validateSEDReplacement "$(color\
-      red)")\1$(validateSEDReplacement "$(color blue)")/g" \
+      "s/^\* (.*)$/ $(validateSEDReplacement "$(paddedColor\
+      red)")\1$(validateSEDReplacement "$(paddedColor blue)")/g" \
     | tr --delete "\n" | sed 's/  / /g' | sed 's/^ *//g' | sed 's/ *$//g')
   if [ "$gitBranch" ]; then
-      gitBranch="$(color blue)(${gitBranch}$(color blue))"
+      gitBranch="$(paddedColor blue)(${gitBranch}$(paddedColor blue))"
   else
-      gitBranch="$(color blue)#!"
+      gitBranch="$(paddedColor blue)#!"
   fi
 
   errorPrompt=""
@@ -27,18 +27,18 @@ prompt_command () {
   fi
 
   if [ `id -u` -eq 0 ]; then
-      local userColor="$(color red)"
+      local userColor="$(paddedColor red)"
   else
-      local userColor="$(color green)"
+      local userColor="$(paddedColor green)"
   fi
 
   if [[ "$TERM" != 'linux' ]]; then
     local titleBar="\[\e]0;${errorPrompt}\u@\h:`pwd`\a\]"
   fi
 
-  export PS1="${titleBar}$(color red)$errorPrompt${userColor}\u$(color\
-      blue)@$(color cyan)\h$(color\
-      blue) (${systemLoad}) ${userColor}\w\n${gitBranch}$(color default) "
+  export PS1="${titleBar}$(paddedColor red)$errorPrompt${userColor}\u$(\
+      paddedColor blue)@$(paddedColor cyan)\h$(paddedColor blue\
+      ) (${systemLoad}) ${userColor}\w\n${gitBranch}$(paddedColor default) "
 }
 PROMPT_COMMAND=prompt_command
 
