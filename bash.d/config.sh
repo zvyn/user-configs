@@ -19,7 +19,6 @@ export HISTIGNORE="&:ls:[bf]g:exit: *:reboot:poweroff"
 export HISTFILE="$HOME/.histfile"
 export HISTSIZE=5000
 export SAVEHIST=5000
-export CDPATH=:/home/milan/
 export PATH="/usr/lib/colorgcc/bin:$PATH:/home/milan/Programme/bin:/home/milan/.gem/ruby/2.0.0/bin"
 export EDITOR="vim"
 export LS_COLORS='di=01;36:*.zip=33:*.tar=33:*.tar.gz=33:*.tar.bz2=33:*.jpg=35:*.JPG=35:*.jpeg=35:*.JPEG=35:*.PNG=35:*.png=35:*.rar=33:*.ico=35:*.gif=35:*.svg=35:*.xcf=35:*.cpp=31:*.h=31:*.rkt=31'
@@ -69,26 +68,52 @@ padWithEscape () {
 }
 
 changeColor () {
-    local color=39
-    local bold=0
-    case $1 in
-        green)
-            color=32;;
-        cyan)
-            color=36;;
-        blue)
-            color=34;;
-        gray)
-            color=37;;
-        darkgrey)
-            color=30;;
-        red)
-            color=31;;
-    esac
-    if [[ "$2" == "bold" ]]; then
-        bold=1
-    fi
-    echo -en "\033[${bold};${color}m"
+    local codes='0;'
+    local prefix=3
+    local color=''
+    local format=''
+    while [[ $1 ]]; do
+        case $1 in
+            fg)
+                prefix=3;;
+            bg)
+                prefix=4;;
+            light)
+                prefix=9;;
+            black)
+                color=0;;
+            red)
+                color=1;;
+            green)
+                color=2;;
+            yellow)
+                color=3;;
+            blue)
+                color=4;;
+            magenta)
+                color=5;;
+            cyan)
+                color=6;;
+            gray)
+                color=7;;
+            bold)
+                format="1;";;
+            dim)
+                format="2;";;
+            underlined)
+                format="4;";;
+            blink)
+                format="5;";;
+            inverted)
+                format="7;";;
+        esac
+        codes+="$format"
+        if [[ "$color" ]]; then
+            codes+="${prefix}${color};"
+        fi
+        shift
+    done
+    echo -en "\e[${codes%?}m"
 }
 
 paddedColor () {

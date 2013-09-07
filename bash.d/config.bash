@@ -9,36 +9,49 @@ function validateSEDReplacement() {
 
 prompt_command () {
   local errorNumber="$?"
-  local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1,2}' | head -1`
+  local braceOpen="$(paddedColor blue reset)("
+  local braceClose="$(paddedColor blue reset))"
+  local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1}' | head -1`
   # local batteryLoad=`acpi | cut -d' ' -f 4 | tr -d ','`
   local gitBranch=$(git branch 2>/dev/null | sed --regexp-extended \
       "s/^\* (.*)$/ $(validateSEDReplacement "$(paddedColor\
-      red)")\1$(validateSEDReplacement "$(paddedColor blue)")/g" \
+      light blue)")\1$(validateSEDReplacement "$(paddedColor blue)")/g" \
     | tr --delete "\n" | sed 's/  / /g' | sed 's/^ *//g' | sed 's/ *$//g')
-  if [ "$gitBranch" ]; then
-      gitBranch="$(paddedColor blue)(${gitBranch}$(paddedColor blue))"
+  if [[ ${systemLoad} > 1.9 ]]; then
+      systemLoad="$braceOpen$(paddedColor bold blink red)$systemLoad$braceClose "
+  elif [[ $systemLoad > 0.9 ]]; then
+      systemLoad="$braceOpen$(paddedColor light yellow)$systemLoad$braceClose "
+  elif [[ $systemLoad > 0.5 ]]; then
+      systemLoad="$braceOpen$(paddedColor cyan)$systemLoad$braceClose "
   else
-      gitBranch="$(paddedColor blue)#!"
+      systemLoad=""
+  fi
+  if [ "$gitBranch" ]; then
+      gitBranch="$braceOpen${gitBranch}$braceClose"
+  else
+      gitBranch="$(paddedColor light blue)#!"
   fi
 
-  errorPrompt=""
+  local errorPrompt=""
   if [ $errorNumber -ne 0 ]; then # set an error string for the prompt, if applicable
-    errorPrompt="($errorNumber) "
+      errorPrompt="$(paddedColor bold red)${errorNumber} "
   fi
 
-  if [ `id -u` -eq 0 ]; then
+  if [[ "$USER" == "milan" ]]; then
+      local userColor="$(paddedColor green)"
+  elif [[ "$USER" == "root" ]];then
       local userColor="$(paddedColor red)"
   else
-      local userColor="$(paddedColor green)"
+      local userColor="$(paddedColor yellow)"
   fi
 
   if [[ "$TERM" != 'linux' ]]; then
-    local titleBar="\[\e]0;${errorPrompt}\u@\h:`pwd`\a\]"
+    local titleBar="\[\e]0;\u@\h:`pwd`\a\]"
   fi
 
-  export PS1="${titleBar}$(paddedColor red)$errorPrompt${userColor}\u$(\
-      paddedColor blue)@$(paddedColor cyan)\h$(paddedColor blue\
-      ) (${systemLoad}) ${userColor}\w\n${gitBranch}$(paddedColor default) "
+  export PS1="${titleBar}${errorPrompt}${userColor}\u$(paddedColor blue\
+      )@\h ${systemLoad}$(paddedColor light blue)\w\n${gitBranch}$(\
+      paddedColor reset) "
 }
 PROMPT_COMMAND=prompt_command
 
