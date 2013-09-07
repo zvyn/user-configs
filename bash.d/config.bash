@@ -9,8 +9,7 @@ function validateSEDReplacement() {
 
 prompt_command () {
   local errorNumber="$?"
-  local braceOpen="$(paddedColor blue reset)("
-  local braceClose="$(paddedColor blue reset))"
+  local delim="$(paddedColor blue)"
   local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1}' | head -1`
   # local batteryLoad=`acpi | cut -d' ' -f 4 | tr -d ','`
   local gitBranch=$(git branch 2>/dev/null | sed --regexp-extended \
@@ -18,18 +17,18 @@ prompt_command () {
       light blue)")\1$(validateSEDReplacement "$(paddedColor blue)")/g" \
     | tr --delete "\n" | sed 's/  / /g' | sed 's/^ *//g' | sed 's/ *$//g')
   if [[ ${systemLoad} > 1.9 ]]; then
-      systemLoad="$braceOpen$(paddedColor bold blink red)$systemLoad$braceClose "
+      systemLoad="$delim($(paddedColor bold blink red)$systemLoad$delim) "
   elif [[ $systemLoad > 0.9 ]]; then
-      systemLoad="$braceOpen$(paddedColor light yellow)$systemLoad$braceClose "
+      systemLoad="$delim($(paddedColor light yellow)$systemLoad$delim) "
   elif [[ $systemLoad > 0.5 ]]; then
-      systemLoad="$braceOpen$(paddedColor cyan)$systemLoad$braceClose "
+      systemLoad="$delim($(paddedColor cyan)$systemLoad$delim) "
   else
       systemLoad=""
   fi
   if [ "$gitBranch" ]; then
-      gitBranch="$braceOpen${gitBranch}$braceClose"
+      gitBranch="$delim(${gitBranch}$delim)"
   else
-      gitBranch="$(paddedColor light blue)#!"
+      gitBranch="$(paddedColor blue)|"
   fi
 
   local errorPrompt=""
@@ -49,9 +48,9 @@ prompt_command () {
   local at="$(paddedColor blue)@"
 
   if [[ "$SSH_CONNECTION" ]];then
-      host="$(paddedColor light blue)"
+      local host="$(paddedColor light blue)"
   else
-      host="$(paddedColor cyan)"
+      local host="$(paddedColor cyan)"
   fi
   host+=$HOSTNAME
 
@@ -59,8 +58,8 @@ prompt_command () {
     local titleBar="\[\e]0;\u@\h:`pwd`\a\]"
   fi
 
-  export PS1="${titleBar}${errorPrompt}${user}${at}${host}:\w ${systemLoad}
-${gitBranch}$(paddedColor reset) "
+  export PS1="${titleBar}${errorPrompt}${user}$delim@${host}$delim:$(\
+      paddedColor cyan)\w${systemLoad}\n${gitBranch}$(paddedColor reset)"
 }
 PROMPT_COMMAND=prompt_command
 
