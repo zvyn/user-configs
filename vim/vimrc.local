@@ -4,7 +4,7 @@ set nocompatible
 " Reload file when changed on the filesystem.
 set autoread
 
-""region key-bindings
+"" key-bindings
     " Turn on mouse in X (use ssh -X for remote)
     set mouse=a
 
@@ -28,9 +28,9 @@ set autoread
     "Pressing ctr-f corrects spelling in both insert and normal mode.
     imap <c-f> <c-g>u<Esc>[H>[s1z=`]a<c-g>u
     nmap <c-f> [s1z=<c-o>
-""endregion
+"/>
 
-""region Tabs
+"" Tabs
     set tabstop=4
     set shiftwidth=4
     set expandtab
@@ -41,17 +41,22 @@ set autoread
 
     " no " conversion please
     let g:Tex_SmartKeyQuote = 0
-""endregion
+"/>
 
-""region Textwidth, Wrapping, Indention
+"" Textwidth, Wrapping, Indention
     set textwidth=79
     set colorcolumn=80
     set autoindent
     set nowrap
-""endregion
+"/>
 
-""region Theme and Layout
-    ""region Displayed Information
+"" Theme and Layout
+    " Set Colors
+    set t_Co=256
+    " colorscheme darkblue
+    colorscheme jellybeans
+
+    "" Displayed Information
         " Enable automatic filetype detection.
         filetype on
         " Set syntax on.
@@ -78,20 +83,15 @@ set autoread
         " No blinking cursor please.
         set gcr=a:blinkon0
 
-        ""region spell
+        "" spell
             set spelllang=de_de,en_us
             highlight clear SpellBad
             highlight SpellBad cterm=underline,bold ctermfg=red
-        ""endregion
-    ""endregion
+        "/>
+    "/>
+"/>
 
-    " Set Colors
-    set t_Co=256
-    colorscheme darkblue
-""endregion
-
-""region C code
-
+"" C code
     " Toggle between .h and .cpp with F4.
     function! ToggleBetweenHeaderAndSourceFile()
       let bufname = bufname("%")
@@ -112,26 +112,26 @@ set autoread
       endif
     endfunction
     map <silent> <F4> :call ToggleBetweenHeaderAndSourceFile()<CR>
-""endregion
+"/>
 
-""region Makefiles
+"" Makefiles
     " But TABs are needed in Makefiles
     au BufNewFile,BufReadPost Makefile se noexpandtab
 
     " don't use Makefile if one is there
     let g:Tex_UseMakefile = 0
-""endregion
+"/>
 
-""region Latex
+"" Latex
     filetype plugin indent on
     set grepprg=grep\ -nH\ $*
     let g:tex_flavor = "latex"
     " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
     " can be called correctly.
     set shellslash
-""endregion
+"/>
 
-""region F5-runner
+"" F5-runner
     " C++
     autocmd FileType c++ map <F5> :w<CR>:!runc %<CR>
 
@@ -140,27 +140,27 @@ set autoread
 
     " Latex + biber
     autocmd FileType latex map <F5> :w<CR>:!pdflatex *Main.tex; biber *Main.bib; pdflatex *Main.tex<CR>
-""endregion
+"/>
 
-""region guioptions
+"" guioptions
     set guioptions=agimrt
     " The following 2 lines are neccesery due to a bug
     set guioptions+=LlRrb
     set guioptions-=LlRrb
     set guifont="Ubuntu Mono 11"
-""endregion
+"/>
 
-""region Syntastics
+"" Syntastics
     let g:syntastic_check_on_open=1
-""endregion
+"/>
 
-""region Regions
+"" Regions
     set foldmethod=marker "indent,marker,syntax
     set foldmarker=region,endregion
     let g:pymode_folding = 0
-""endregion
+"/>
 
-""region Autocomplete
+"" Autocomplete
     let g:neocomplete#disable_auto_complete = 1
 
     " Test if the previous char is a space
@@ -176,6 +176,6 @@ set autoread
 
     " Use shift-tab to navigate backwards
     inoremap <expr><s-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-""endregion
+"/>
 
-"file-settings for vim: foldmethod=marker foldmarker=""region,""endregion
+"file-settings for vim: foldmethod=marker foldmarker="","/>
