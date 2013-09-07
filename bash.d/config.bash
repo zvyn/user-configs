@@ -38,20 +38,29 @@ prompt_command () {
   fi
 
   if [[ "$USER" == "milan" ]]; then
-      local userColor="$(paddedColor green)"
+      local user="$(paddedColor green)"
   elif [[ "$USER" == "root" ]];then
-      local userColor="$(paddedColor red)"
+      local user="$(paddedColor red)"
   else
-      local userColor="$(paddedColor yellow)"
+      local user="$(paddedColor yellow)"
   fi
+  user+="$USER"
+
+  local at="$(paddedColor blue)@"
+
+  if [[ "$SSH_CONNECTION" ]];then
+      host="$(paddedColor light blue)"
+  else
+      host="$(paddedColor cyan)"
+  fi
+  host+=$HOSTNAME
 
   if [[ "$TERM" != 'linux' ]]; then
     local titleBar="\[\e]0;\u@\h:`pwd`\a\]"
   fi
 
-  export PS1="${titleBar}${errorPrompt}${userColor}\u$(paddedColor blue\
-      )@\h ${systemLoad}$(paddedColor light blue)\w\n${gitBranch}$(\
-      paddedColor reset) "
+  export PS1="${titleBar}${errorPrompt}${user}${at}${host}:\w ${systemLoad}
+${gitBranch}$(paddedColor reset) "
 }
 PROMPT_COMMAND=prompt_command
 
