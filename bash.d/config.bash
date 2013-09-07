@@ -48,9 +48,9 @@ prompt_command () {
   local at="$(paddedColor blue)@"
 
   if [[ "$SSH_CONNECTION" ]];then
-      local host="$(paddedColor light blue)"
+      local host="$(paddedColor yellow)"
   else
-      local host="$(paddedColor cyan)"
+      local host="$(paddedColor blue)"
   fi
   host+=$HOSTNAME
 
