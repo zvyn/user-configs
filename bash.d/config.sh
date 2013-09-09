@@ -64,60 +64,78 @@ alias reload='exec $0'
 ## Functions
 ## colors
 padWithEscape () {
-    echo -en "\[$*\]"
+  echo -en "\[$*\]"
 }
 
 changeColor () {
-    local codes='0;'
-    local prefix=3
-    local color=''
-    local format=''
-    while [[ $1 ]]; do
-        case $1 in
-            fg)
-                prefix=3;;
-            bg)
-                prefix=4;;
-            light)
-                prefix=9;;
-            black)
-                color=0;;
-            red)
-                color=1;;
-            green)
-                color=2;;
-            yellow)
-                color=3;;
-            blue)
-                color=4;;
-            magenta)
-                color=5;;
-            cyan)
-                color=6;;
-            gray)
-                color=7;;
-            bold)
-                format="1;";;
-            dim)
-                format="2;";;
-            underlined)
-                format="4;";;
-            blink)
-                format="5;";;
-            inverted)
-                format="7;";;
-        esac
-        codes+="$format"
-        if [[ "$color" ]]; then
-            codes+="${prefix}${color};"
-        fi
-        shift
-    done
-    echo -en "\e[${codes%?}m"
+  ## Usage
+  local help_message="\
+Usage:
+  changeColor ((fg|bg|light|light-bg)? color (bold|dim|underlined|inverted)*)+
+Example:
+  changeColor fg red light-bg green underlined bold"
+  #/>
+
+  ## local properties
+  local codes='0;'
+  local prefix=3
+  local color=''
+  local format=''
+  #/>
+
+  ## parse command-line
+  while [[ $1 ]]; do
+    case $1 in
+      -h|--help)
+        echo -e "$help_message"
+        return 0;;
+      fg)
+        prefix=3;;
+      bg)
+        prefix=4;;
+      light)
+        prefix=9;;
+      light-bg)
+        prefix=10;;
+      black)
+        color=0;;
+      red)
+        color=1;;
+      green)
+        color=2;;
+      yellow)
+        color=3;;
+      blue)
+        color=4;;
+      magenta)
+        color=5;;
+      cyan)
+        color=6;;
+      gray)
+        color=7;;
+      bold)
+        format="1;";;
+      dim)
+        format="2;";;
+      underlined)
+        format="4;";;
+      blink)
+        format="5;";;
+      inverted)
+        format="7;";;
+    esac
+    codes+="$format"
+    if [[ "$color" ]]; then
+      codes+="${prefix}${color};"
+    fi
+    shift
+  done
+  #/>
+  echo -en "\e[${codes%?}m"
 }
 
 paddedColor () {
-    echo -n $(padWithEscape $(changeColor $*))
+  echo -n $(padWithEscape $(changeColor $*))
 }
 #/>
 
@@ -229,9 +247,9 @@ bindMusic () {
 ## 3-Liners
 
 say () {
-    for word in $*
-    do mpv http://ssl.gstatic.com/dictionary/static/sounds/de/0/$word.mp3
-    done
+  for word in $*
+  do mpv http://ssl.gstatic.com/dictionary/static/sounds/de/0/$word.mp3
+  done
 }
 
 psgrep () {
@@ -343,4 +361,4 @@ fi
 ((_HOME_CONFIG_SHELL_PROFILE_+=1))
 export _HOME_CONFIG_SHELL_PROFILE_
 
-#file-settings for vim: foldmethod=marker foldmarker=##,#/>
+#modeline for vim: foldmethod=marker foldmarker=##,#/> tabstop=2 shiftwidth=2
