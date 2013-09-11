@@ -23,6 +23,7 @@ function setup_user_configs() {
     [X/xinitrc]="$HOME/.xinitrc"
     [X/xprofile]="$HOME/.xprofile"
     [.bashrc]="$HOME/.bashrc"
+    [shell/inputrc]="$HOME/.inputrc"
     [vim/vimrc.local]="$HOME/.vimrc.local"
     [vim/vimrc.bundles.local]="$HOME/.vimrc.bundles.local")
   #/>
