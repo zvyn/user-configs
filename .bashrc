@@ -11,4 +11,4 @@ function source_folder () {
   fi
 }
 
-source_folder ~/config/bash.d
+source_folder ~/config/shell/bash-source.d
