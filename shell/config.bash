@@ -2,6 +2,11 @@
 # ~/config/bash_profile
 #
 
+#<! functions
+pwdtail () { #returns the last 2 fields of the working directory
+  pwd|awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
+}
+
 function validateSEDReplacement() {
     echo "$1" | sed --expression 's/\\/\\\\/g' --expression 's/\//\\\//g' \
         --expression 's/&/\\\&/g'
@@ -26,9 +31,9 @@ prompt_command () {
       systemLoad=""
   fi
   if [ "$gitBranch" ]; then
-      gitBranch="$delim(${gitBranch}$delim)"
+      gitBranch="${delim}${gitBranch}$delim#"
   else
-      gitBranch="$(paddedColor blue)|"
+      gitBranch="$(paddedColor blue)#"
   fi
 
   local errorPrompt=""
@@ -61,14 +66,9 @@ prompt_command () {
   export PS1="${titleBar}${errorPrompt}${user}$delim@${host}$delim:$(\
       paddedColor cyan)\w${systemLoad}\n${gitBranch}$(paddedColor reset)"
 }
-PROMPT_COMMAND=prompt_command
+#!>
 
-pwdtail () { #returns the last 2 fields of the working directory
-  pwd|awk -F/ '{nlast = NF -1;print $nlast"/"$NF}'
-}
-
-# bind '"\M-v"':vi-editing-mode
-
+#<! complete
 complete -cf sudo
 complete -cf s
 
@@ -86,6 +86,14 @@ complete -f -o default -X '!*.+(dvi|DVI)' dvips dvipdf xdvi
 complete -f -o default -X '!*.+(pdf|PDF)' xpdf ps2pdf evince
 
 complete -f -o default -X '!*.tex' tex latex pdflatex
+#!>
+
+PROMPT_COMMAND=prompt_command
+[[ -b /dev/mapper/data ]] ||\
+    ((sudo cryptsetup luksOpen /dev/sda1 data --key-file ~/Private/urandom4k &&\
+    mount /data) &)
 
 ((_HOME_CONFIG_BASH_PROFILE_+=1))
 export _HOME_CONFIG_BASH_PROFILE_
+
+# vim: foldmarker=#<!,#!>

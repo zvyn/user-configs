@@ -7,3 +7,4 @@ source ${dirname}/bash.d/config.sh
 
 xmodmap /home/milan/.Xmodmap &
 sudo hdmi-switch &
+sudo trackpoint-init

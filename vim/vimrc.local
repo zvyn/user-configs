@@ -1,8 +1,14 @@
+"" general setup
 " Don't behave like vi when vim can do better.
 set nocompatible
 
 " Reload file when changed on the filesystem.
 set autoread
+
+" Set shell to bash and source the coreponding configs.
+set shell=bash
+set shellcmdflag=-ic
+"/>
 
 "" key-bindings
     " Turn on mouse in X (use ssh -X for remote)

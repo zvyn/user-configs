@@ -31,6 +31,8 @@
       <property name="F13" type="string" value="rotate.sh -n"/>
       <property name="F14" type="string" value="easystroke enable"/>
       <property name="Print" type="string" value="kupfer"/>
+      <property name="&lt;Shift&gt;XF86WakeUp" type="string" value="xfce4-terminal"/>
+      <property name="XF86AudioMicMute" type="string" value="switch_sink"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

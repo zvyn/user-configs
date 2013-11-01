@@ -30,7 +30,7 @@ alias ssh_w3h='command ssh wshaend@www.haendel.uni-freiburg.de'
 alias ssh_info='command ssh oberkirm@login.informatik.uni-freiburg.de'
 alias ssh_rz='command ssh mo54@login.uni-freiburg.de'
 alias ssh_home='command ssh -p 41 m@o-desktop.homeip.net'
-alias ssh_küche='command ssh root@ssh.oberkirch.org'
+alias ssh_küche='command ssh -X root@ssh.oberkirch.org'
 alias ssh_lfs='command ssh root@stp.ruf.uni-freiburg.de'
 alias qemu_squash='qemu-system-x86_64 -soundhw hda -m 3G -kernel kernel -append "url=http://10.0.2.2:8000/root.sqfs ip=::::::dhcp quiet splash" -initrd initramfs --enable-kvm'
 alias simpleHTTP='python2 -m SimpleHTTPServer'
@@ -59,6 +59,7 @@ alias status='sudo systemctl status'
 alias halt='sudo shutdown -h now'
 alias ducks='du -cksh * | sort -rn'
 alias reload='exec $0'
+alias t='pdflatex *.tex &>/dev/null &'
 #/>
 
 ## Functions
@@ -156,7 +157,7 @@ if [[ $HOSTNAME = "auen" ]]; then
     --partial --progress\
     --delete --delete-excluded  # safe with snapshots'
   alias rsync_küche='command rsync /home/milan/\
-    --rsh="ssh" root@webtop:/home/milan/\
+    --rsh="ssh" root@webtop:/mnt/milan/\
     --one-file-system\
     --exclude="Musik"\
     --exclude="Trash/"\
@@ -226,6 +227,7 @@ cryptmount() {
     else
       local error=$?
       if [[ $error == 5 ]]; then
+        sudo umount /dev/mapper/$2
         sudo umount /dev/mapper/$2
         sudo cryptsetup luksClose $2 &&\
           zenity --info --text="Device '$2' locked."

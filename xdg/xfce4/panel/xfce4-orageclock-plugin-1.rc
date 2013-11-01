@@ -1,13 +1,14 @@
 show_frame=false
-fg_set=false
+fg_set=true
 bg_set=false
 timezone=
 width_set=false
 height_set=false
-data0=%R
-font0=Ubuntu 12
-data1=%d.%m.%Y
-font1=Ubuntu Condensed, 10
+data0=%H:%M
+font0=Ubuntu Mono 8
+data1=%d.%m
+font1=Ubuntu Mono 8
 tooltip=%A %d %B %Y/%V
 hib_timing=false
+fg=65535R 65535G 65535B
 
