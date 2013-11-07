@@ -18,20 +18,20 @@
       </property>
       <property name="mode" type="uint" value="1"/>
       <property name="output-name" type="string" value="LVDS1"/>
-      <property name="autohide" type="bool" value="false"/>
+      <property name="autohide" type="bool" value="true"/>
       <property name="disable-struts" type="bool" value="false"/>
-      <property name="length-adjust" type="bool" value="true"/>
+      <property name="length-adjust" type="bool" value="false"/>
       <property name="nrows" type="uint" value="1"/>
       <property name="background-style" type="uint" value="1"/>
       <property name="background-image" type="string" value="/home/milan/Bastelei/white-to-transparent.png"/>
       <property name="background-color" type="array">
-        <value type="uint" value="8738"/>
-        <value type="uint" value="8738"/>
-        <value type="uint" value="8738"/>
+        <value type="uint" value="1542"/>
+        <value type="uint" value="514"/>
+        <value type="uint" value="514"/>
         <value type="uint" value="65535"/>
       </property>
-      <property name="background-alpha" type="uint" value="100"/>
-      <property name="leave-opacity" type="uint" value="90"/>
+      <property name="background-alpha" type="uint" value="75"/>
+      <property name="leave-opacity" type="uint" value="50"/>
     </property>
   </property>
   <property name="plugins" type="empty">

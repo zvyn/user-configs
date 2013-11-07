@@ -1,6 +1,6 @@
 delay=3
 region=3
-action=1
+action=2
 show_mouse=0
 screenshot_dir=file:/home/milan/Downloads
 app=gimp-2.8

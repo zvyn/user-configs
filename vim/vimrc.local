@@ -10,6 +10,10 @@ set shell=bash
 set shellcmdflag=-ic
 "/>
 
+"" 
+set clipboard=unnamedplus
+"/!>
+
 "" key-bindings
     " Turn on mouse in X (use ssh -X for remote)
     set mouse=a

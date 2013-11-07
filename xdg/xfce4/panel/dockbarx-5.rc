@@ -1,8 +1,8 @@
 [Xfce4DockbarX]
 config=true
 mode=0
-color=#222222222222
-alpha=100
+color=#060602020101
+alpha=75
 image=
 offset=0
 orient=left
