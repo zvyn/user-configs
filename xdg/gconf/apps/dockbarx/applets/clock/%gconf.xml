@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="command" mtime="1381314422" type="string">
+		<stringvalue>orage</stringvalue>
+	</entry>
+	<entry name="custom_format" mtime="1381314509" type="string">
+		<stringvalue>&lt;span foreground=&quot;#FFFFFF&quot; font=&quot;Sans 14&quot;&gt;%H:%M&lt;/span&gt;</stringvalue>
+	</entry>
+	<entry name="use_custom_format" mtime="1381314510" type="bool" value="false"/>
+	<entry name="show_date" mtime="1381314469" type="bool" value="false"/>
+	<entry name="color" mtime="1381314422" type="string">
+		<stringvalue>#FFFFFF</stringvalue>
+	</entry>
+	<entry name="font" mtime="1381314456" type="string">
+		<stringvalue>Ubuntu Condensed, 13</stringvalue>
+	</entry>
+	<entry name="text_direction" mtime="1381317663" type="string">
+		<stringvalue>left-right</stringvalue>
+	</entry>
+</gconf>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="applet_list" mtime="1381314705" type="list" ltype="string">
+		<li type="string">
+			<stringvalue>Clock</stringvalue>
+		</li>
+		<li type="string">
+			<stringvalue>DockbarX</stringvalue>
+		</li>
+		<li type="string">
+			<stringvalue>Volume Control</stringvalue>
+		</li>
+	</entry>
+</gconf>
