@@ -18,7 +18,7 @@
       </property>
       <property name="mode" type="uint" value="1"/>
       <property name="output-name" type="string" value="LVDS1"/>
-      <property name="autohide" type="bool" value="true"/>
+      <property name="autohide" type="bool" value="false"/>
       <property name="disable-struts" type="bool" value="false"/>
       <property name="length-adjust" type="bool" value="false"/>
       <property name="nrows" type="uint" value="1"/>
