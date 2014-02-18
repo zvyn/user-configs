@@ -89,9 +89,6 @@ complete -f -o default -X '!*.tex' tex latex pdflatex
 #!>
 
 PROMPT_COMMAND=prompt_command
-[[ -b /dev/mapper/data ]] ||\
-    ((sudo cryptsetup luksOpen /dev/sda1 data --key-file ~/Private/urandom4k &&\
-    mount /data) &)
 
 ((_HOME_CONFIG_BASH_PROFILE_+=1))
 export _HOME_CONFIG_BASH_PROFILE_

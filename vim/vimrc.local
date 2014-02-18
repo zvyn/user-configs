@@ -12,7 +12,7 @@ set shellcmdflag=-ic
 
 "" 
 set clipboard=unnamedplus
-"/!>
+"/>
 
 "" key-bindings
     " Turn on mouse in X (use ssh -X for remote)
@@ -65,6 +65,7 @@ set clipboard=unnamedplus
     set t_Co=256
     " colorscheme darkblue
     colorscheme jellybeans
+    colorscheme 256-grayvim
 
     "" Displayed Information
         " Enable automatic filetype detection.
@@ -186,6 +187,12 @@ set clipboard=unnamedplus
 
     " Use shift-tab to navigate backwards
     inoremap <expr><s-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+"/>
+
+"" Example for custom syntax-highlighting
+sy clear
+sy match mine_hexa /\v0x[0-9A-Fa-f]+/
+hi mine_hexa ctermfg=DarkMagenta
 "/>
 
 "file-settings for vim: foldmethod=marker foldmarker="","/>

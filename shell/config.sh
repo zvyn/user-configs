@@ -26,11 +26,14 @@ export QEMU_AUDIO_DRV=pa
 #/>
 
 ## Aliases
+alias na='sudo netctl-auto'
+alias nal='sudo netctl-auto list'
+alias nac='sudo netctl-auto current'
 alias ssh_w3h='command ssh wshaend@www.haendel.uni-freiburg.de'
 alias ssh_info='command ssh oberkirm@login.informatik.uni-freiburg.de'
 alias ssh_rz='command ssh mo54@login.uni-freiburg.de'
 alias ssh_home='command ssh -p 41 m@o-desktop.homeip.net'
-alias ssh_küche='command ssh -X root@ssh.oberkirch.org'
+alias ssh_küche='command ssh -Y root@shell.oberkirch.org'
 alias ssh_lfs='command ssh root@stp.ruf.uni-freiburg.de'
 alias qemu_squash='qemu-system-x86_64 -soundhw hda -m 3G -kernel kernel -append "url=http://10.0.2.2:8000/root.sqfs ip=::::::dhcp quiet splash" -initrd initramfs --enable-kvm'
 alias simpleHTTP='python2 -m SimpleHTTPServer'
@@ -64,10 +67,6 @@ alias t='pdflatex *.tex &>/dev/null &'
 
 ## Functions
 ## colors
-padWithEscape () {
-  echo -en "\[$*\]"
-}
-
 changeColor () {
   ## Usage
   local help_message="\
@@ -133,6 +132,10 @@ Example:
   done
   #/>
   echo -en "\e[${codes%?}m"
+}
+
+padWithEscape () {
+  echo -en "\[$*\]"
 }
 
 paddedColor () {
