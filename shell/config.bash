@@ -24,7 +24,7 @@ prompt_command () {
   if [[ ${systemLoad} > 1.9 ]]; then
       systemLoad="$delim($(paddedColor bold blink red)$systemLoad$delim) "
   elif [[ $systemLoad > 0.9 ]]; then
-      systemLoad="$delim($(paddedColor light yellow)$systemLoad$delim) "
+      systemLoad="$delim($(paddedColor yellow)$systemLoad$delim) "
   elif [[ $systemLoad > 0.5 ]]; then
       systemLoad="$delim($(paddedColor cyan)$systemLoad$delim) "
   else

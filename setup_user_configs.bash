@@ -15,9 +15,6 @@ function setup_user_configs() {
 
   ## Map files in this repository to files in the users home-directory.
   declare -A local locations=(
-    [xdg/xfce4]="$XDG_CONFIG_HOME/xfce4"
-    [xdg/autostart]="$XDG_CONFIG_HOME/autostart"
-    [xdg/awn]="$XDG_CONFIG_HOME/awn"
     [X/Xmodmap]="$HOME/.Xmodmap"
     [X/Xresources]="$HOME/.Xresources"
     [X/xinitrc]="$HOME/.xinitrc"

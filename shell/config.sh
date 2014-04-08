@@ -26,6 +26,7 @@ export QEMU_AUDIO_DRV=pa
 #/>
 
 ## Aliases
+alias nat='sudo netctl-auto switch-to'
 alias na='sudo netctl-auto'
 alias nal='sudo netctl-auto list'
 alias nac='sudo netctl-auto current'

@@ -55,17 +55,24 @@ set clipboard=unnamedplus
 
 "" Textwidth, Wrapping, Indention
     set textwidth=79
-    set colorcolumn=80
     set autoindent
     set nowrap
 "/>
 
 "" Theme and Layout
     " Set Colors
-    set t_Co=256
+    if &term == 'xterm'
+        set t_Co=256
+    endif
+    highlight clear
+    syntax reset
     " colorscheme darkblue
-    colorscheme jellybeans
-    colorscheme 256-grayvim
+    " colorscheme jellybeans
+    " colorscheme 256-grayvim
+    colorscheme lightcolors
+    " colorscheme eclipse
+    let &colorcolumn=80  " join(range(80, 81), ',')
+    highlight ColorColumn ctermbg=grey
 
     "" Displayed Information
         " Enable automatic filetype detection.

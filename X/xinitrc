@@ -20,5 +20,8 @@ fi
 if [ $1 ]; then
   exec $@
 else
-  exec xfce4-session
+  # exec startkde
+  # avant-window-navigator &
+  plasma &
+  exec xfwm4
 fi

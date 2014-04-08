@@ -1,8 +1,0 @@
-[Desktop Entry]
-Icon=avant-window-navigator
-Type=Application
-Name=Avant Window Navigator
-X-GNOME-Autostart-enabled=true
-Exec=avant-window-navigator --startup
-Hidden=true
-
