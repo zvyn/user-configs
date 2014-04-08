@@ -72,7 +72,7 @@ function setup_user_configs() {
 
 ## Run only if called directly. Makes sourcing of this file safe.
 if [ ! $__NAME__ ]; then
-  __NAME__=$(basename -s .bash $0)
+  __NAME__=$(basename $0 .bash)
   if [[ $(type -t ${__NAME__}) == function ]]; then
     ${__NAME__} $0 $*
   fi
