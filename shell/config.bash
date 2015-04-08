@@ -63,7 +63,7 @@ prompt_command () {
     local titleBar="\[\e]0;\u@\h:`pwd`\a\]"
   fi
 
-  export PS1="${titleBar}${errorPrompt}${user}$delim@${host}$delim:$(\
+  PS1="${titleBar}${errorPrompt}${user}$delim@${host}$delim:$(\
       paddedColor cyan)\w${systemLoad}\n${gitBranch}$(paddedColor reset)"
 }
 #!>
