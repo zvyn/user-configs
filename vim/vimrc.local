@@ -2,12 +2,25 @@
 " Don't behave like vi when vim can do better.
 set nocompatible
 
+"" vundle
+filetype off
+call vundle#rc()
+filetype plugin indent on
+"/>
+
 " Reload file when changed on the filesystem.
 set autoread
 
 " Set shell to bash and source the coreponding configs.
 set shell=bash
 set shellcmdflag=-ic
+"/>
+
+"" Bundles
+Bundle 'leafgarland/typescript-vim'
+let g:typescript_compiler_options = '--sourceMap --removeComments'
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 "/>
 
 "" 
@@ -75,8 +88,6 @@ set clipboard=unnamedplus
     highlight ColorColumn ctermbg=grey
 
     "" Displayed Information
-        " Enable automatic filetype detection.
-        filetype on
         " Set syntax on.
         syntax on
         " Highlight search-term.
