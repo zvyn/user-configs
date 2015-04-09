@@ -19,7 +19,6 @@ function setup_user_configs() {
     [X/Xresources]="$HOME/.Xresources"
     [X/xinitrc]="$HOME/.xinitrc"
     [X/xprofile]="$HOME/.xprofile"
-    [.bashrc]="$HOME/.bashrc"
     [shell/inputrc]="$HOME/.inputrc"
     [vim/vimrc.local]="$HOME/.vimrc.local"
     [vim/vimrc.bundles.local]="$HOME/.vimrc.bundles.local")
@@ -36,9 +35,10 @@ function setup_user_configs() {
       mkdir -p $backup_dir
       for file in ${locations[*]}; do
         if [ -e $file ]; then
-          mv --no-target-directory $file $backup_dir/$(basename $file)
+          mv --no-target-directory "$file" "$backup_dir/$(basename $file)"
         fi
       done
+      mv --no-target-directory "$HOME/.bashrc" "$backup_dir/.bashrc"
       ;;
   esac
   #/>
@@ -48,6 +48,11 @@ function setup_user_configs() {
     ln --symbolic --interactive --no-target-directory\
       ${self[location]}/$target ${locations[$target]}
   done
+  #/>
+
+  ## Create ~/.bashrc to source configs.
+  cp .bashrc "$HOME/.bashrc"
+  echo source_folder \"${self[location]}/shell/bash-source.d\" >> ~/.bashrc
   #/>
 
   ## Optionally install vim-spf13. See http://vim.spf13.com.
