@@ -26,10 +26,9 @@ export QEMU_AUDIO_DRV=pa
 #/>
 
 ## Aliases
-alias nat='sudo netctl-auto switch-to'
-alias na='sudo netctl-auto'
-alias nal='sudo netctl-auto list'
-alias nac='sudo netctl-auto current'
+alias nat='netctl-auto switch-to'
+alias nal='netctl-auto list'
+alias nac='netctl-auto current'
 alias ssh_w3h='command ssh wshaend@www.haendel.uni-freiburg.de'
 alias ssh_info='command ssh oberkirm@login.informatik.uni-freiburg.de'
 alias ssh_rz='command ssh mo54@login.uni-freiburg.de'
@@ -362,6 +361,26 @@ else
 fi
 }
 #/>
+
+## sudo magic
+function se () {
+  name=$1
+  shift
+  case $(type -t $name) in
+    'alias')
+      # A naïve 'alias $name | cut -d"'" -f2' wouldn't handle "'"s correctly.
+      eval sudo $(type $name | cut -f 2- -d'`' | head -c -2 ) $@
+      ;;
+    'function')
+      sudo sh -c "export $(type $name | tail -n +1); $name $@"
+      ;;
+    *)
+      sudo $name $@
+      ;;
+  esac
+}
+#/>
+
 #/>
 
 ((_HOME_CONFIG_SHELL_PROFILE_+=1))
