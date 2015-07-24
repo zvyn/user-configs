@@ -2,12 +2,6 @@
 " Don't behave like vi when vim can do better.
 set nocompatible
 
-"" vundle
-filetype off
-call vundle#rc()
-filetype plugin indent on
-"/>
-
 " Reload file when changed on the filesystem.
 set autoread
 
@@ -16,14 +10,7 @@ set shell=bash
 set shellcmdflag=-ic
 "/>
 
-"" Bundles
-Bundle 'leafgarland/typescript-vim'
-let g:typescript_compiler_options = '--sourceMap --removeComments'
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-"/>
-
-"" 
+"" Clipboard
 set clipboard=unnamedplus
 "/>
 
@@ -34,7 +21,6 @@ set clipboard=unnamedplus
     " Key for extra combinations.
     let mapleader = ","
     let g:mapleader = ","
-    let g:users_emmet_leader_key = '<C-,>'
 
     " Run any runnable file.
     map <F5> :w<CR>:!/usr/local/lib/torben/library/runable/codeFile.py -f  $(echo -en $PWD/; basename %)<CR>
@@ -188,24 +174,6 @@ set clipboard=unnamedplus
     set foldmethod=marker "indent,marker,syntax
     set foldmarker=region,endregion
     let g:pymode_folding = 0
-"/>
-
-"" Autocomplete
-    let g:neocomplete#disable_auto_complete = 1
-
-    " Test if the previous char is a space
-    function! s:check_back_space()
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction
-
-    " Use tab to open or navigate in autocomplete.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ neocomplete#start_manual_complete()
-
-    " Use shift-tab to navigate backwards
-    inoremap <expr><s-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 "/>
 
 "" Example for custom syntax-highlighting
