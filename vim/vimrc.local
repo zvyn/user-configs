@@ -34,6 +34,7 @@ set clipboard=unnamedplus
     " Key for extra combinations.
     let mapleader = ","
     let g:mapleader = ","
+    let g:users_emmet_leader_key = '<C-,>'
 
     " Run any runnable file.
     map <F5> :w<CR>:!/usr/local/lib/torben/library/runable/codeFile.py -f  $(echo -en $PWD/; basename %)<CR>
@@ -82,7 +83,7 @@ set clipboard=unnamedplus
     " colorscheme darkblue
     " colorscheme jellybeans
     " colorscheme 256-grayvim
-    colorscheme lightcolors
+    " colorscheme lightcolors
     " colorscheme eclipse
     let &colorcolumn=80  " join(range(80, 81), ',')
     highlight ColorColumn ctermbg=grey

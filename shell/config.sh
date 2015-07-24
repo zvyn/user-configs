@@ -26,6 +26,7 @@ export QEMU_AUDIO_DRV=pa
 #/>
 
 ## Aliases
+alias wifi-menu='sudo wifi-menu'
 alias nat='netctl-auto switch-to'
 alias nal='netctl-auto list'
 alias nac='netctl-auto current'
