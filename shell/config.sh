@@ -63,6 +63,7 @@ alias halt='sudo shutdown -h now'
 alias ducks='du -cksh * | sort -rn'
 alias reload='exec $0'
 alias t='pdflatex *.tex &>/dev/null &'
+alias hg_patch_import='hg import --no-commit'
 #/>
 
 ## Functions
@@ -162,6 +163,7 @@ if [[ $HOSTNAME = "auen" ]]; then
   alias rsync_küche='command rsync /home/milan/\
     --rsh="ssh" root@webtop:/mnt/milan/\
     --one-file-system\
+    --exclude=".Private/"\
     --exclude="Musik"\
     --exclude="Trash/"\
     --exclude=".dropbox/"\
