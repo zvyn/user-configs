@@ -95,8 +95,6 @@ complete -f -o default -X '!*.tex' tex latex pdflatex
 
 PROMPT_COMMAND=prompt_command
 
-source /usr/share/doc/pkgfile/command-not-found.bash
-
 ((_HOME_CONFIG_BASH_PROFILE_+=1))
 export _HOME_CONFIG_BASH_PROFILE_
 
