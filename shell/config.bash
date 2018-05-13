@@ -36,6 +36,11 @@ prompt_command () {
       gitBranch="$(paddedColor blue)#"
   fi
 
+  local env=""
+  if [ $VIRTUAL_ENV ]; then
+      env=" $(paddedColor red)($(basename $(dirname $VIRTUAL_ENV))/$(basename $VIRTUAL_ENV))$delim"
+  fi
+
   local errorPrompt=""
   if [ $errorNumber -ne 0 ]; then # set an error string for the prompt, if applicable
       errorPrompt="$(paddedColor bold red)${errorNumber} "
@@ -64,7 +69,7 @@ prompt_command () {
   fi
 
   PS1="${titleBar}${errorPrompt}${user}$delim@${host}$delim:$(\
-      paddedColor cyan)\w${systemLoad}\n${gitBranch}$(paddedColor reset)"
+      paddedColor cyan)\w${systemLoad}${env}\n${gitBranch}$(paddedColor reset)"
 }
 #!>
 
