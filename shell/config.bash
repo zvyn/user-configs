@@ -14,28 +14,20 @@ function validateSEDReplacement() {
 
 prompt_command () {
   local errorNumber="$?"
-  local delim="$(paddedColor blue)"
+  local delim="$(paddedColor cyan)"
   local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1}' | head -1`
   # local batteryLoad=`acpi | cut -d' ' -f 4 | tr -d ','`
-  local gitBranch=$(git branch 2>/dev/null | sed --regexp-extended \
-      "s/^\* (.*)$/ $(validateSEDReplacement "$(paddedColor\
-      light blue)")\1$(validateSEDReplacement "$(paddedColor blue)")/g" \
-    | tr --delete "\n" | sed 's/  / /g' | sed 's/^ *//g' | sed 's/ *$//g')
+  local gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '#')
+  local gitBranches=" $(git branch --no-merged 2>/dev/null| tr -d ' ' | tr '\n' ' ')"
   if [[ ${systemLoad} > 1.9 ]]; then
-      systemLoad="$delim($(paddedColor bold blink red)$systemLoad$delim) "
+      systemLoad="$delim($(paddedColor bold blink red)$systemLoad$delim)"
   elif [[ $systemLoad > 0.9 ]]; then
-      systemLoad="$delim($(paddedColor yellow)$systemLoad$delim) "
+      systemLoad="$delim($(paddedColor yellow)$systemLoad$delim)"
   elif [[ $systemLoad > 0.5 ]]; then
-      systemLoad="$delim($(paddedColor cyan)$systemLoad$delim) "
+      systemLoad="$delim($(paddedColor cyan)$systemLoad$delim)"
   else
       systemLoad=""
   fi
-  if [ "$gitBranch" ]; then
-      gitBranch="${delim}${gitBranch}$delim#"
-  else
-      gitBranch="$(paddedColor blue)#"
-  fi
-
   local env=""
   if [ $VIRTUAL_ENV ]; then
       env=" $(paddedColor red)($(basename $(dirname $VIRTUAL_ENV))/$(basename $VIRTUAL_ENV))$delim"
@@ -69,7 +61,8 @@ prompt_command () {
   fi
 
   PS1="${titleBar}${errorPrompt}${user}$delim@${host}$delim:$(\
-      paddedColor cyan)\w${systemLoad}${env}\n${gitBranch}$(paddedColor reset)"
+      paddedColor cyan)\w${systemLoad}${env}${gitBranches}\n$(\
+      paddedColor bold cyan)${gitBranch}$(paddedColor reset) "
 }
 #!>
 
@@ -94,6 +87,10 @@ complete -f -o default -X '!*.tex' tex latex pdflatex
 #!>
 
 PROMPT_COMMAND=prompt_command
+
+if (uname -a | grep -vq Ubuntu); then
+  source /usr/share/doc/pkgfile/command-not-found.bash
+fi
 
 ((_HOME_CONFIG_BASH_PROFILE_+=1))
 export _HOME_CONFIG_BASH_PROFILE_
