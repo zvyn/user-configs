@@ -14,16 +14,19 @@ set expandtab
 set autoindent
 set smartindent
 
-" Use tab to circle through auto-complete popup
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
+let mapleader=","
 set mouse=a
 set number
+set hidden  " Remember history and allow siwching from unsaved buffers
+set clipboard=unnamed  " Use middle mouse button to paste into X
+set undofile  " Never forget!
+let g:undofile_warn_mode=2  " Ask for confirmation when going back to undofile
 
 " Plugins
 call plug#begin()
+ Plug 'jlanzarotta/bufexplorer' 
+ Plug 'ervandew/supertab'
+ Plug 'Carpetsmoker/undofile_warn.vim'  " warn when using undofile
  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " Auto-complete
  Plug 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }  " Use Python AST
  Plug 'scrooloose/nerdtree'  " File-browser
