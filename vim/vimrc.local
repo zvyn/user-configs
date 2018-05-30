@@ -8,6 +8,7 @@ set autoread
 " Set shell to bash and source the coreponding configs.
 set shell=bash
 set shellcmdflag=-ic
+set path+=**
 "/>
 
 "" Clipboard
@@ -68,8 +69,8 @@ set clipboard=unnamedplus
     syntax reset
     " colorscheme darkblue
     " colorscheme jellybeans
-    " colorscheme 256-grayvim
-    colorscheme lightcolors
+    colorscheme 256-grayvim
+    " colorscheme lightcolors
     " colorscheme eclipse
     let &colorcolumn=80  " join(range(80, 81), ',')
     highlight ColorColumn ctermbg=grey
