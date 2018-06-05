@@ -65,6 +65,7 @@ alias ducks='du -cksh * | sort -rn'
 alias reload='exec $0'
 alias t='pdflatex *.tex &>/dev/null &'
 alias gitdmerged='git branch -d $((git checkout master && git pull) > /dev/null && git branch --merged | grep -v master | tr -d "\n")'
+alias hg_patch_import='hg import --no-commit'
 #/>
 
 ## Functions
@@ -164,6 +165,7 @@ if [[ $HOSTNAME = "auen" ]]; then
   alias rsync_küche='command rsync /home/milan/\
     --rsh="ssh" root@webtop:/mnt/milan/\
     --one-file-system\
+    --exclude=".Private/"\
     --exclude="Musik"\
     --exclude="Trash/"\
     --exclude=".dropbox/"\

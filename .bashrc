@@ -10,3 +10,5 @@ function source_folder () {
     done
   fi
 }
+
+source_folder ~/user-configs/shell/bash-source.d

@@ -17,7 +17,7 @@ prompt_command () {
   local delim="$(paddedColor cyan)"
   local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1}' | head -1`
   # local batteryLoad=`acpi | cut -d' ' -f 4 | tr -d ','`
-  local gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '#')
+  local gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '▶')
   local gitBranches=" $(git branch --no-merged 2>/dev/null| tr -d ' ' | tr '\n' ' ')"
   if [[ ${systemLoad} > 1.9 ]]; then
       systemLoad="$delim($(paddedColor bold blink red)$systemLoad$delim)"
