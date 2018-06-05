@@ -1,6 +1,6 @@
 " Use system Python internally  (with python[2]-neovim from community)
-let g:python_host_prog = "/bin/python2"
-let g:python3_host_prog = "/bin/python3"
+let g:python_host_prog = "/home/milan/.config/nvim//env2/bin/python"
+let g:python3_host_prog = "/home/milan/.config/nvim//env/bin/python"
 
 " Tabs and indentiation:
 filetype indent on
@@ -27,8 +27,6 @@ call plug#begin()
  Plug 'jlanzarotta/bufexplorer' 
  Plug 'ervandew/supertab'
  Plug 'Carpetsmoker/undofile_warn.vim'  " warn when using undofile
- Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " Auto-complete
- Plug 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }  " Use Python AST
  Plug 'scrooloose/nerdtree'  " File-browser
  Plug 'Xuyuanp/nerdtree-git-plugin'  " Show git status in NERDTree
  Plug 'Chiel92/vim-autoformat'  " Generic beutifier
@@ -38,6 +36,10 @@ call plug#begin()
  Plug 'plytophogy/vim-virtualenv'  " Show virtualenv in airline
  Plug 'airblade/vim-gitgutter'  " Flag changes since last commit
  Plug 'tpope/vim-fugitive'  " Show branch in airline (sorry)
+ if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-jedi'  " Use Python AST
+ end
 call plug#end()
 
 " NERDTree key-bindings
@@ -65,3 +67,7 @@ let g:deoplete#enable_at_startup = 1
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+:set guicursor=
+" Workaround some broken plugins which set guicursor indiscriminately.
+:autocmd OptionSet guicursor noautocmd set guicursor=
