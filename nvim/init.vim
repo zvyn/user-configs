@@ -24,6 +24,7 @@ set colorcolumn=80  " Highlight column 80
 set hidden  " Remember history and allow siwching from unsaved buffers
 set clipboard=unnamed  " Use middle mouse button to paste into X
 set undofile  " Never forget!
+set autoread
 let g:undofile_warn_mode=2  " Ask for confirmation when going back to undofile
 
 " Magic!
@@ -37,6 +38,7 @@ augroup END
 " Plugins
 call plug#begin()
  Plug 'jlanzarotta/bufexplorer'  " Switch buffers with confidence
+ Plug 'Asheq/close-buffers.vim'  " Helper to close several buffers at once
  Plug 'ervandew/supertab'  " Non-buggy Tab for completion
  Plug 'Carpetsmoker/undofile_warn.vim'  " warn when using undofile
  Plug 'scrooloose/nerdtree'  " File-browser
