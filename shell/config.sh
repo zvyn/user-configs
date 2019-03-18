@@ -69,6 +69,7 @@ alias hg_patch_import='hg import --no-commit'
 alias a='. env/bin/activate'
 alias d='deactivate'
 alias V='nvim -S'
+alias bra='ip -c --br a'
 #/>
 
 ## Functions
