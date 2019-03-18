@@ -30,7 +30,7 @@ prompt_command () {
   fi
   local env=""
   if [ $VIRTUAL_ENV ]; then
-      env=" $(paddedColor red)($(basename $(dirname $VIRTUAL_ENV))/$(basename $VIRTUAL_ENV))$delim"
+      env="$(paddedColor yellow)$(basename $(dirname $VIRTUAL_ENV))$delim "
   fi
 
   local errorPrompt=""
@@ -39,7 +39,7 @@ prompt_command () {
   fi
 
   if [[ "$USER" == "milan" ]]; then
-      local user="$(paddedColor green)"
+      local user="$(paddedColor blue)"
   elif [[ "$USER" == "root" ]];then
       local user="$(paddedColor red)"
   else
@@ -60,8 +60,8 @@ prompt_command () {
     local titleBar="\[\e]0;\u@\h:`pwd`\a\]"
   fi
 
-  PS1="${titleBar}${errorPrompt}${user}$delim@${host}$delim:$(\
-      paddedColor cyan)\w${systemLoad}${env}${gitBranches}\n$(\
+  PS1="${titleBar}${errorPrompt}${user}${at}${host}$delim $(\
+      paddedColor cyan)\w${systemLoad}${gitBranches}\n${env}$(\
       paddedColor bold cyan)${gitBranch}$(paddedColor reset) "
 }
 #!>
