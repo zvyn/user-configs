@@ -70,9 +70,21 @@ alias a='. env/bin/activate'
 alias d='deactivate'
 alias V='nvim -S'
 alias bra='ip -c --br a'
+alias freeze='pip freeze -r requirements.txt | grep -v "pkg-resources" > requirements_new.txt && mv requirements_new.txt requirements.txt'
 #/>
 
 ## Functions
+## pip freeze
+clean_freeze () {
+  local venv=$(mktemp -d) && \
+  python3.7 -m venv $venv && \
+  source $venv/bin/activate && \
+  pip install -r requirements.txt && \
+  freeze && \
+  deactivate && \
+  rm -r $venv
+}
+#/>
 ## colors
 changeColor () {
   ## Usage
