@@ -19,8 +19,8 @@ export HISTIGNORE="&:ls:[bf]g:exit: *:reboot:poweroff"
 export HISTFILE="$HOME/.histfile"
 export HISTSIZE=5000
 export SAVEHIST=5000
-export PATH="/usr/lib/colorgcc/bin:$PATH:/home/milan/Programme/bin:/home/milan/.gem/ruby/2.0.0/bin"
-export EDITOR="vim"
+export PATH="/usr/lib/colorgcc/bin:/home/milan/.local/bin:$PATH"
+export EDITOR="nvim"
 export LS_COLORS='di=01;36:*.zip=33:*.tar=33:*.tar.gz=33:*.tar.bz2=33:*.jpg=35:*.JPG=35:*.jpeg=35:*.JPEG=35:*.PNG=35:*.png=35:*.rar=33:*.ico=35:*.gif=35:*.svg=35:*.xcf=35:*.cpp=31:*.h=31:*.rkt=31'
 export QEMU_AUDIO_DRV=pa
 export CDPATH=~/Code
@@ -37,7 +37,7 @@ alias ssh_home='command ssh -p 41 m@o-desktop.homeip.net'
 alias ssh_küche='command ssh -Y root@shell.oberkirch.org'
 alias ssh_lfs='command ssh root@stp.ruf.uni-freiburg.de'
 alias qemu_squash='qemu-system-x86_64 -soundhw hda -m 3G -kernel kernel -append "url=http://10.0.2.2:8000/root.sqfs ip=::::::dhcp quiet splash" -initrd initramfs --enable-kvm'
-alias simpleHTTP='python2 -m SimpleHTTPServer'
+alias http='python3 -m http.server'
 alias ..='cd ..'
 alias cd='pushd $PWD 1>/dev/null; cd'
 alias cd_uni=' cd Studium/SoSe2013'
@@ -70,6 +70,7 @@ alias a='. env/bin/activate'
 alias d='deactivate'
 alias V='nvim -S'
 alias bra='ip -c --br a'
+alias zipfile='python3 -m zipfile'
 #/>
 
 ## Functions

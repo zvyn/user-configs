@@ -37,6 +37,7 @@ augroup END
 
 " Plugins
 call plug#begin()
+ Plug 'ciaranm/securemodelines'  " Whitelist some commands instead of blacklisting to few
  Plug 'jlanzarotta/bufexplorer'  " Switch buffers with confidence
  Plug 'Asheq/close-buffers.vim'  " Helper to close several buffers at once
  Plug 'ervandew/supertab'  " Non-buggy Tab for completion

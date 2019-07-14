@@ -17,5 +17,6 @@ fi
 [ -f ~/.xprofile ] && source ~/.xprofile
 #endregion
 
-/usr/bin/startkde
+# /usr/bin/startkde
 # /usr/bin/cinnamon-session
+$@

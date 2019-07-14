@@ -72,7 +72,7 @@ complete -cf s
 
 complete -A directory mkdir rmdir
 
-complete -f -o default -X '*.+(zip|ZIP)'  zip 
+complete -f -o default -X '*.+(zip|ZIP)'  zip
 complete -f -o default -X '!*.+(zip|ZIP)' unzip
 complete -f -o default -X '*.+(gz|GZ)'    gzip
 complete -f -o default -X '!*.+(gz|GZ)'   gunzip
