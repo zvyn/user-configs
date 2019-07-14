@@ -13,6 +13,8 @@ set softtabstop=4
 set expandtab
 set autoindent
 set smartindent
+set nomodeline
+set list
 
 let mapleader=","
 
@@ -51,6 +53,7 @@ call plug#begin()
  Plug 'airblade/vim-gitgutter'  " Flag changes since last commit
  Plug 'tpope/vim-fugitive'  " Show branch in airline (sorry)
  Plug 'tpope/vim-obsession'  " Session managment helper
+ Plug 'vim-scripts/dbext.vim'
  if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'zchee/deoplete-jedi'  " Use Python AST
@@ -58,6 +61,8 @@ call plug#begin()
 call plug#end()
 
 let g:ale_linters = {'python': ['flake8', 'mypy']}
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#overflow_marker = '…'
 let g:airline#extensions#tabline#buffer_idx_mode = 1

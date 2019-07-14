@@ -17,16 +17,16 @@ prompt_command () {
   local delim="$(paddedColor cyan)"
   local systemLoad=`uptime | egrep -o '[0-9]{1,2}\.[0-9]{1}' | head -1`
   # local batteryLoad=`acpi | cut -d' ' -f 4 | tr -d ','`
-  local gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '▶')
-  local gitBranches=" $(git branch --no-merged 2>/dev/null| tr -d ' ' | tr '\n' ' ')"
+  local gitBranch="$(paddedColor bold green)$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '') "
+  local gitBranches="$(git branch --no-merged 2>/dev/null| tr -d ' ' | tr '\n' ' ')"
   if [[ ${systemLoad} > 1.9 ]]; then
-      systemLoad="$delim($(paddedColor bold blink red)$systemLoad$delim)"
+      systemLoad="$delim$(paddedColor bold blink red)$systemLoad$delim "
   elif [[ $systemLoad > 0.9 ]]; then
-      systemLoad="$delim($(paddedColor yellow)$systemLoad$delim)"
+      systemLoad="$delim$(paddedColor yellow)$systemLoad$delim "
   elif [[ $systemLoad > 0.5 ]]; then
-      systemLoad="$delim($(paddedColor cyan)$systemLoad$delim)"
+      systemLoad="$delim$(paddedColor cyan)$systemLoad$delim "
   else
-      systemLoad=""
+      systemLoad="$delim$(paddedColor green)$systemLoad$delim "
   fi
   local env=""
   if [ $VIRTUAL_ENV ]; then
@@ -36,33 +36,30 @@ prompt_command () {
   local errorPrompt=""
   if [ $errorNumber -ne 0 ]; then # set an error string for the prompt, if applicable
       errorPrompt="$(paddedColor bold red)${errorNumber} "
+  else
+      errorPrompt="$(paddedColor bold green)# "
   fi
 
   if [[ "$USER" == "milan" ]]; then
-      local user="$(paddedColor blue)"
+      local user=""
   elif [[ "$USER" == "root" ]];then
-      local user="$(paddedColor red)"
+      local user="$(paddedColor bold red)$USER "
   else
-      local user="$(paddedColor yellow)"
+      local user="$(paddedColor bold yellow)$USER "
   fi
-  user+="$USER"
-
-  local at="$(paddedColor blue)@"
 
   if [[ "$SSH_CONNECTION" ]];then
-      local host="$(paddedColor yellow)"
+      local at="$(paddedColor blue)@"
+      local host="${at}$(paddedColor bold yellow)${HOSTNAME} "
   else
-      local host="$(paddedColor blue)"
+      local host=""
   fi
-  host+=$HOSTNAME
 
   if [[ "$TERM" != 'linux' ]]; then
     local titleBar="\[\e]0;\u@\h:`pwd`\a\]"
   fi
 
-  PS1="${titleBar}${errorPrompt}${user}${at}${host}$delim $(\
-      paddedColor cyan)\w${systemLoad}${gitBranches}\n${env}$(\
-      paddedColor bold cyan)${gitBranch}$(paddedColor reset) "
+  PS1="${titleBar}${user}${host}$(paddedColor light cyan)\w ${env}${gitBranch}$(paddedColor cyan)${gitBranches}\n${errorPrompt}$(paddedColor reset)"
 }
 #!>
 
