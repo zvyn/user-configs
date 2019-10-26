@@ -52,8 +52,8 @@ alias ll='ls -lhX --group-directories-first'
 alias g='git'
 alias s='sudo'
 alias y='yay'
-alias v='vim'
-alias sv='sudo -E vim'
+alias v="$EDITOR"
+alias sv="sudo -E $EDITOR"
 alias svn_add_folder='svn add --depth=empty'
 alias nmpc='ncmpcpp'
 alias sysd='sudo systemctl'
