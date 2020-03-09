@@ -85,7 +85,7 @@ complete -f -o default -X '!*.tex' tex latex pdflatex
 
 PROMPT_COMMAND=prompt_command
 
-if (uname -a | grep -vq Ubuntu); then
+if [ -f /usr/share/doc/pkgfile/command-not-found.bash ]; then
   source /usr/share/doc/pkgfile/command-not-found.bash
 fi
 
