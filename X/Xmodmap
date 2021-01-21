@@ -1,5 +1,0 @@
-keycode 38 = a A a A adiaeresis Adiaeresis adiaeresis Adiaeresis
-keycode 32 = o O o O odiaeresis Odiaeresis odiaeresis Odiaeresis
-keycode 30 = u U u U udiaeresis Udiaeresis udiaeresis Udiaeresis
-remove Lock = Caps_Lock
-keysym Caps_Lock = Escape
