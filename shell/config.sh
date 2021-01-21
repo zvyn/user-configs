@@ -74,6 +74,8 @@ alias zipfile='python3 -m zipfile'
 alias zebra='ip -c --br a'
 alias bra='zebra'
 alias freeze='pip freeze -r requirements.txt | grep -v "pkg-resources" > requirements_new.txt && mv requirements_new.txt requirements.txt'
+alias j=journalctl
+alias ju='j -u'
 #/>
 
 ## Functions
