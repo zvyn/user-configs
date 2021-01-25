@@ -20,6 +20,7 @@ let mapleader=","
 
 set title
 set mouse=a
+let g:ale_set_balloons=1
 set number  " Show absolute number in current line
 set relativenumber  " Show relative number for the rest
 set colorcolumn=80  " Highlight column 80
