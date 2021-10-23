@@ -1,0 +1,51 @@
+* {
+    font-size: large;
+    font-family: monospace;
+    transition: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar {
+    color: white;
+    background-color: #3a3c49;
+}
+
+.modules-right > widget > *,
+.modules-center > widget > * {
+    padding: 0 8px;
+    color: lightgray;
+}
+
+#taskbar {
+    font-family: Ubuntu Condensed;
+}
+
+#window {
+    font-family: monospace;
+    margin-top: 0;
+    background: transparent;
+    margin-left: 16px;
+}
+
+#workspaces {
+    margin: 0;
+}
+
+#taskbar button,
+#workspaces button {
+    padding: 0 8px;
+    color: gray;
+    background: transparent;
+}
+
+#taskbar button.active,
+#workspaces button.focused {
+    color: white;
+}
+
+#taskbar button:hover,
+#workspaces button:hover {
+    color: #4e94e2;
+}
