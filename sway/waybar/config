@@ -39,7 +39,7 @@
     "custom/media#general": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 60,
+        "max-length": 80,
         "format-icons": {
             "spotify": "",
             "spotifyd": "",
@@ -60,9 +60,9 @@
     "custom/spotify": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 60,
+        "max-length": 80,
         "format-icons": {
-            "default": "  "
+            "default": ""
         },
         "on-click": "playerctl -p spotifyd previous",
         "on-click-right": "playerctl -p spotifyd next",
@@ -76,11 +76,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format": "{icon}{volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": "{volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
