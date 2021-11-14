@@ -1,6 +1,6 @@
 * {
     font-size: large;
-    font-family: monospace;
+    font-family: Terminus, monospace;
     transition: none;
     border: none;
     margin: 0;
@@ -18,12 +18,7 @@ window#waybar {
     color: lightgray;
 }
 
-#taskbar {
-    font-family: Ubuntu Condensed;
-}
-
 #window {
-    font-family: monospace;
     margin-top: 0;
     background: transparent;
     margin-left: 16px;

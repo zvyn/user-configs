@@ -29,3 +29,5 @@ alias zebra='ip -c --br a'
 alias bra='zebra'
 alias j=journalctl
 alias ju='j -u'
+alias Mount='udisksctl mount --block-device'
+alias Unmount='udisksctl unmount --block-device'

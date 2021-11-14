@@ -2,8 +2,8 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/media#general", "custom/spotify", "pulseaudio", "tray", "idle_inhibitor"],
-    // disabled: "wlr/taskbar", "network", "cpu", "custom/gpu-usage", "memory", "temperature"
+    "modules-right": ["wlr/taskbar", "custom/media#general", "custom/spotify", "pulseaudio", "tray", "idle_inhibitor"],
+    // disabled: "network", "cpu", "custom/gpu-usage", "memory", "temperature"
     // Modules configuration
     "sway/workspaces": {
         //"disable-scroll": true,
@@ -76,11 +76,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon}{volume}% {format_source}",
+        "format": "<small>{icon}</small> {volume}%  {format_source}",
         "format-bluetooth": "{icon} {volume}% {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}%",
+        "format-source": "<small></small> {volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -103,7 +103,7 @@
             "activated": "",
             "deactivated": ""
         }
-    }
+    },
     // "cpu": {
     //     "format": "{usage}% ",
     //     "tooltip": false
@@ -133,11 +133,11 @@
     //     "format-disconnected": "Disconnected ⚠",
     //     "format-alt": "{ifname}: {ipaddr}/{cidr}"
     // },
-    // "wlr/taskbar": {
-    //     "format": "{app_id:.20}",
-    //     "tooltip-format": "{title}",
-    //     "on-click": "activate",
-    //     "on-click-middle": "close",
-    // }
+    "wlr/taskbar": {
+        "format": "{app_id:.20}",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+    }
 }
 
