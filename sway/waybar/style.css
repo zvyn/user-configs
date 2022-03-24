@@ -1,6 +1,6 @@
 * {
     font-size: large;
-    font-family: Terminus, monospace;
+    font-family: monospace;
     transition: none;
     border: none;
     margin: 0;
@@ -18,6 +18,16 @@ window#waybar {
     color: lightgray;
 }
 
+#battery.warning {
+    background: transparent;
+    color: orange;
+}
+
+#battery.critical {
+    background: transparent;
+    color: red;
+}
+
 #window {
     margin-top: 0;
     background: transparent;
@@ -30,7 +40,7 @@ window#waybar {
 
 #taskbar button,
 #workspaces button {
-    padding: 0 8px;
+    padding: 0 4px;
     color: gray;
     background: transparent;
 }

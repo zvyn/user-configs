@@ -25,21 +25,23 @@
     "sway/window": {
         "format": "{}",
         "rewrite": {
-            "(.*) — Mozilla Firefox": "$1 - ",
-            "(.*) - Chromium": "$1 - ",
+            "(.*)...ZEIT (ONLINE|Arbeit)(.*)": "$1 $3",
+            "(.*) - YouTube — Mozilla Firefox": "$1 ",
+            "(.*) — Mozilla Firefox": "$1 ",
+            "(.*) - Chromium": "$1 ",
             "(.*) - NVIM": "$1  ",
             "fish (.*)": "$1 "
         }
     },
     "clock": {
-        "format": "{:%F %H:%M}",
+        "format": "{:%H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
-        "format-alt": "{:%H:%M}"
+        "format-alt": "{:%F %H:%M}"
     },
     "custom/media#general": {
-        "format": "{icon} {}",
+        "format": "{icon}{}",
         "return-type": "json",
-        "max-length": 80,
+        "max-length": 50,
         "format-icons": {
             "spotify": "",
             "spotifyd": "",
@@ -104,35 +106,56 @@
             "deactivated": ""
         }
     },
-    // "cpu": {
-    //     "format": "{usage}% ",
-    //     "tooltip": false
-    // },
-    // "custom/gpu-usage": {
-    //     "exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
-    //     "format": "{}% ",
-    //     "return-type": "",
-    //     "interval": 60
-    // },
-    // "memory": {
-    //     "format": "{}% "
-    // },
-    // "temperature": {
-    //     // "thermal-zone": 2,
-    //     "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input",
-    //     "critical-threshold": 80,
-    //     // "format-critical": "{temperatureC}°C {icon}",
-    //     "format": "{temperatureC}°C {icon}",
-    //     "format-icons": ["", "", ""]
-    // },
-    // "network": {
-    //     // "interface": "wlp2*", // (Optional) To force the use of this interface
-    //     "format-wifi": "{essid} ({signalStrength}%) ",
-    //     "format-ethernet": "{ipaddr}/{cidr} ",
-    //     "format-linked": "{ifname} (No IP) ",
-    //     "format-disconnected": "Disconnected ⚠",
-    //     "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    // },
+    "battery": {
+        "interval": 60,
+        "states": {
+            "full": 100,
+            "ok": 99,
+            "middle": 74,
+            "warning": 30,
+            "critical": 15
+        },
+        "format-plugged-full": "",
+        "format": "{icon} {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-ok": "{icon}",
+        "format-plugged-ok": "",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{timeTo}",
+        "tooltip-format-ok": "{timeTo}: {capacity}%",
+        "max-length": 25
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "custom/gpu-usage": {
+        "exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
+        "format": "{}% ",
+        "return-type": "",
+        "interval": 60
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format": "{ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%): {ipaddr}"
+    },
     "wlr/taskbar": {
         "format": "{app_id:.20}",
         "tooltip-format": "{title}",
