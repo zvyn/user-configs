@@ -17,5 +17,5 @@ export GOPATH=$HOME/go
 export PATH="/usr/lib/colorgcc/bin:$PATH:/home/milan/Programme/bin:/home/milan/.gem/ruby/2.0.0/bin:$GOPATH/bin"
 export LS_COLORS='di=01;36:*.zip=33:*.tar=33:*.tar.gz=33:*.tar.bz2=33:*.jpg=35:*.JPG=35:*.jpeg=35:*.JPEG=35:*.PNG=35:*.png=35:*.rar=33:*.ico=35:*.gif=35:*.svg=35:*.xcf=35:*.cpp=31:*.h=31:*.rkt=31'
 export QEMU_AUDIO_DRV=pa
-export CDPATH=~/Code
+export CDPATH=.:~/Code:~
 export PIP_REQUIRE_VIRTUALENV=1
