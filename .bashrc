@@ -5,11 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# If running on first console, execute sway (instead)
-if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  exec sway
-fi
-
 # If not a child of fish, execute fish (instead)
 if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
 then

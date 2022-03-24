@@ -166,36 +166,6 @@ list_mod_parameters ()
     done;
   done
 }
-
-# Mounts cryptdevices with fstab-entries (defaults to 500GB-HDD on auenland)
-cryptmount() {
-  if [[ $# == 0 ]]; then
-    sudo umount /data/media/Musik
-    cryptmount /dev/sda1 data
-    bindMusic
-  else
-    if zenity --password | sudo cryptsetup luksOpen $1 $2; then
-      mount /dev/mapper/$2 || sudo mount /dev/mapper/$2
-    else
-      local error=$?
-      if [[ $error == 5 ]]; then
-        sudo umount /dev/mapper/$2
-        sudo umount /dev/mapper/$2
-        sudo cryptsetup luksClose $2 &&\
-          zenity --info --text="Device '$2' locked."
-      elif [[ $error == 2 ]]; then
-        cryptmount $1 $2
-      elif [[ $error != 1 ]]; then
-        zenity --error --text="An error occoured: $?"
-      fi
-    fi
-  fi
-}
-
-bindMusic () {
-  sudo mount --bind /data/media/Musik /home/milan/Musik
-}
-
 #/>
 
 ## 3-Liners
@@ -218,13 +188,6 @@ wiki () {
 playFreq () {
   f=$1;echo "int s=16e3/$f;main(i){unsigned char v[s];read(0,v,s);for(;;)putchar(v[i%s]=(v[i%s]+v[++i%s])/2);}"|gcc -x c -&&./a.out</dev/urandom|aplay -d 2
 }
-# remind me, its important!
-# usage: remindme <time> <text>
-# e.g.: remindme 10m "omg, the pizza"
-function remindme() {
-sleep $1 && (zenity --info --text "$2" || echo "$2") &
-}
-#/>
 
 ## (Un-)Pack
 # Unpacks Archives inplace
