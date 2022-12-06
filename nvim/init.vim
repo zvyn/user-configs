@@ -1,3 +1,6 @@
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
 " Use virtualenv internally since Ubuntu has no siutable packages
 let g:python_host_prog = "/home/milan/.config/nvim/env2/bin/python"
 let g:python3_host_prog = "/home/milan/.config/nvim/env/bin/python3"
@@ -29,6 +32,7 @@ set clipboard=unnamed  " Use middle mouse button to paste into X
 set undofile  " Never forget!
 set autoread
 let g:undofile_warn_mode=2  " Ask for confirmation when going back to undofile
+let test#python#runner = 'pytest'
 
 " Magic!
 autocmd VimResized * wincmd =  " Split window evenly on every resize
@@ -50,18 +54,23 @@ call plug#begin()
  Plug 'w0rp/ale'  " Generic linter integration
  Plug 'rakr/vim-one'  " Atom One color scheme
  Plug 'vim-airline/vim-airline'  " The status-bar at the bottom
+ Plug 'vim-airline/vim-airline-themes'
  Plug 'plytophogy/vim-virtualenv'  " Show virtualenv in airline
  Plug 'airblade/vim-gitgutter'  " Flag changes since last commit
  Plug 'tpope/vim-fugitive'  " Show branch in airline (sorry)
  Plug 'tpope/vim-obsession'  " Session managment helper
  Plug 'vim-scripts/dbext.vim'
- if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-jedi'  " Use Python AST
- end
+ Plug 'raimon49/requirements.txt.vim'
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'vim-test/vim-test'
+ Plug 'neomake/neomake'
+ Plug 'CarloDePieri/vim-pytest'
+ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+ Plug 'nvim-lua/plenary.nvim'
+ Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 call plug#end()
 
-let g:ale_linters = {'python': ['flake8', 'mypy']}
+let g:ale_linters = {'python': ['flake8']}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:airline#extensions#tabline#enabled = 1
@@ -83,6 +92,12 @@ nmap <S-Tab> <Plug>AirlineSelectPrevTab
 nmap <Tab> <Plug>AirlineSelectNextTab
 
 let g:airline_skip_empty_sections = 1
+
+" Telescope
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " NERDTree key-bindings
 map <C-Bslash> :NERDTreeToggle<CR>
@@ -109,9 +124,14 @@ colorscheme one
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='one'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
 
 " Turn on auto-completion on startup
 let g:deoplete#enable_at_startup = 1
+g:deoplete#sources#jedi#show_docstring = 1
 
 " Jump to the last position when reopening a file:
 if has("autocmd")
@@ -121,3 +141,12 @@ endif
 :set guicursor=
 " Workaround some broken plugins which set guicursor indiscriminately.
 :autocmd OptionSet guicursor noautocmd set guicursor=
+
+" Aliases
+command GPOH Git push origin HEAD
+command COMMIT Git commit -av
+
+" Switch from Terminal mode using <Esc>
+tnoremap <C-space> <C-\><C-n>
+
+source /home/milan/user-configs/nvim/coc.vim
