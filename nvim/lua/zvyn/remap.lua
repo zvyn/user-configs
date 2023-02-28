@@ -6,3 +6,5 @@ vim.keymap.set(
     ":nohlsearch<Return>",
     { silent = true }
 )
+-- Make shortcut to exit terminal more accessible:
+vim.keymap.set("t", "<C-space>", "<C-\\><C-n>")
