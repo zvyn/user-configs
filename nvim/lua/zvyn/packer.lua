@@ -12,6 +12,13 @@ return require('packer').startup(function(use)
     use('nvim-tree/nvim-web-devicons')
 
     use {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+            require("lsp_lines").setup()
+        end,
+    }
+
+    use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }

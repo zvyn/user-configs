@@ -10,7 +10,7 @@ lsp.nvim_workspace()
 lsp.setup()
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
   signs = true,
   update_in_insert = false,
   underline = true,
