@@ -1,3 +1,4 @@
 xdg/*
 Session.vim
 /main/
+/nvim/plugin/packer_compiled.lua
