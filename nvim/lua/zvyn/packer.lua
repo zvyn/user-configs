@@ -9,7 +9,6 @@ return require('packer').startup(function(use)
     use('tpope/vim-fugitive')
     use('airblade/vim-gitgutter')
     use('tpope/vim-obsession')
-    use('nvim-tree/nvim-web-devicons')
 
     use {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -19,8 +18,8 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        -- or                            , branch = '0.1.x',
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
     use {
@@ -53,7 +52,7 @@ return require('packer').startup(function(use)
     }
     use {
       'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+      requires = { 'nvim-tree/nvim-web-devicons' }
     }
     use {
         "folke/trouble.nvim",
