@@ -9,6 +9,39 @@ return require('packer').startup(function(use)
     use('tpope/vim-fugitive')
     use('airblade/vim-gitgutter')
     use('tpope/vim-obsession')
+    use('mfussenegger/nvim-lint')
+    use('tpope/vim-eunuch')
+    use('navarasu/onedark.nvim')
+    use {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup(
+                {
+                    suggestion = {
+                        auto_trigger = true,
+                    }
+                }
+            )
+        end,
+    }
+
+    use {
+        "nvim-neotest/neotest",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "antoinemadec/FixCursorHold.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-neotest/neotest-python",
+        }
+    }
+    use({
+        "andythigpen/nvim-coverage",
+        requires = {
+            "nvim-lua/plenary.nvim",
+        }
+    })
 
     use {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -21,12 +54,6 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
-    }
-    use {
-        'navarasu/onedark.nvim',
-        config = function()
-            require('onedark').load()
-        end
     }
     use {
         'VonHeikemen/lsp-zero.nvim',

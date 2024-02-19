@@ -26,6 +26,12 @@ vim.api.nvim_create_autocmd(
     }
 )
 
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+
 
 -- Jump to last position when re-opening a file
 vim.api.nvim_create_autocmd({"BufReadPost"}, {
